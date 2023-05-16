@@ -1,26 +1,24 @@
 {
-    "idDeclaration": 17692047,
-    "idTechnicalReglaments": [
-        28
+    "idDeclaration": 17695724,
+    "idTechnicalReglaments": [],
+    "idDeclScheme": 3674,
+    "idObjectDeclType": 2,
+    "idGroups": [],
+    "idDeclType": 18,
+    "idProductSingleLists": [
+        15000537
     ],
-    "idDeclScheme": 230,
-    "idObjectDeclType": 3,
-    "idGroups": [
-        605
-    ],
-    "idDeclType": 2,
-    "idProductSingleLists": [],
     "awaitForApprove": false,
     "editApp": false,
     "unpublishedChanges": false,
     "idStatus": 6,
     "assignRegNumber": false,
-    "number": "ЕАЭС N RU Д-KR.РА03.В.85430/23",
+    "number": "ВП RU Д-CN.РА01.А.43766/23",
     "submissionDate": null,
-    "declRegDate": "2023-05-15",
-    "declEndDate": "2030-05-14",
+    "declRegDate": "2023-05-16",
+    "declEndDate": "2023-11-15",
     "noSanction": true,
-    "lastUpdate": "2023-05-15T23:31:20.01",
+    "lastUpdate": "2023-05-16T10:16:54.021",
     "idSigner": null,
     "idSignerEmployee": null,
     "firstName": null,
@@ -28,53 +26,53 @@
     "patronymic": null,
     "annexes": [],
     "applicant": {
-        "idLegalSubject": 29919643,
+        "idLegalSubject": 29930870,
         "idEgrul": null,
-        "idApplicantType": 1,
+        "idApplicantType": 2,
         "idLegalSubjectType": 1,
-        "fullName": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ИНВЕСТИЦИОННАЯ КОМПАНИЯ \"ДЖИ ЭЙ ГРУПП\"",
-        "shortName": "ООО \"ИК \"ДЖИ ЭЙ ГРУПП\"",
-        "idPerson": 51856960,
-        "surname": "Лисицын",
-        "firstName": "Эдуард",
-        "patronymic": "Станиславович",
-        "headPosition": "Директор",
-        "applicantHead": false,
-        "idResponsiblePerson": 51856961,
-        "responsibleSurname": "Клочкова",
-        "responsibleFirstName": "Татьяна",
-        "responsiblePatronymic": "Дмитриевна",
-        "responsiblePosition": "Представитель",
-        "responsibleDocName": "Доверенность",
-        "responsibleDocNumber": "45",
-        "responsibleDocDate": "2023-02-15",
+        "fullName": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МЭЛОН ФЭШН ГРУП\"",
+        "shortName": "АО \"МЭЛОН ФЭШН ГРУП\"",
+        "idPerson": 51871218,
+        "surname": "Уржумцев",
+        "firstName": "Михаил",
+        "patronymic": "Михайлович",
+        "headPosition": "Генеральный директор",
+        "applicantHead": true,
+        "idResponsiblePerson": 51871219,
+        "responsibleSurname": "Уржумцев",
+        "responsibleFirstName": "Михаил",
+        "responsiblePatronymic": "Михайлович",
+        "responsiblePosition": "Генеральный директор",
+        "responsibleDocName": null,
+        "responsibleDocNumber": null,
+        "responsibleDocDate": null,
         "responsibleContacts": [],
-        "ogrn": "1126671020035",
-        "ogrnAssignDate": "2012-11-20",
-        "inn": "6671406835",
-        "kpp": "667101001",
-        "idLegalForm": 9,
+        "ogrn": "1057813298553",
+        "ogrnAssignDate": "2005-12-27",
+        "inn": "7839326623",
+        "kpp": "783901001",
+        "idLegalForm": 8,
         "idKopf": null,
         "nameLegalForm": null,
-        "regDate": "2015-03-30",
-        "regOrganName": "Инспекция Федеральной налоговой службы по Верх-Исетскому району г.Екатеринбурга",
+        "regDate": "2005-12-27",
+        "regOrganName": "Межрайонная инспекция Федеральной налоговой службы №15 по Санкт-Петербургу",
         "addlRegInfo": null,
         "isEecRegister": true,
         "contacts": [
             {
-                "idContact": 36553584,
+                "idContact": 36568343,
                 "idContactType": 4,
-                "value": "office@goldapple.ru"
+                "value": "certgroup@melonfashion.com"
             },
             {
-                "idContact": 36553583,
+                "idContact": 36568342,
                 "idContactType": 1,
-                "value": "+73433858687"
+                "value": "+78122404620"
             }
         ],
         "addresses": [
             {
-                "idAddress": 82643854,
+                "idAddress": 82670366,
                 "idAddrType": 1,
                 "idCodeOksm": "643",
                 "oksmShort": true,
@@ -85,8 +83,8 @@
                 "idStreet": null,
                 "idHouse": null,
                 "flat": null,
-                "postCode": "620014",
-                "fullAddress": "620014, Россия, область Свердловская, город Екатеринбург, улица Сакко И Ванцетти, Дом 62, Офис 703",
+                "postCode": "190103",
+                "fullAddress": "190103, Россия, город Санкт-Петербург, улица 10-я Красноармейская, дом 22, литер А, помещение 1-Н, 6 этаж",
                 "gln": null,
                 "foreignDistrict": null,
                 "foreignCity": null,
@@ -103,10 +101,10 @@
     "applicantFilials": [],
     "manufIsApplicant": false,
     "manufacturer": {
-        "idLegalSubject": 29919644,
+        "idLegalSubject": 29930871,
         "idEgrul": null,
         "idLegalSubjectType": 3,
-        "fullName": "«Eleven Street Co., Ltd.»",
+        "fullName": "«Anhui Garments Import & Export Co., Ltd»",
         "shortName": null,
         "idPerson": null,
         "surname": null,
@@ -133,13 +131,13 @@
         "regDate": null,
         "regOrganName": null,
         "addlRegInfo": null,
-        "isEecRegister": true,
+        "isEecRegister": false,
         "contacts": [],
         "addresses": [
             {
-                "idAddress": 82643855,
+                "idAddress": 82670367,
                 "idAddrType": 1,
-                "idCodeOksm": "410",
+                "idCodeOksm": "156",
                 "oksmShort": true,
                 "idSubject": null,
                 "idDistrict": null,
@@ -147,12 +145,12 @@
                 "idLocality": null,
                 "idStreet": null,
                 "idHouse": null,
-                "flat": "GLN 8809121470011",
+                "flat": "GLN 6972392460004",
                 "postCode": null,
-                "fullAddress": "Корея, Республика, 416, Hangang-daero, Jung-gu, Seoul, GLN 8809121470011",
-                "gln": "8809121470011",
-                "foreignDistrict": null,
-                "foreignCity": "416, Hangang-daero, Jung-gu, Seoul",
+                "fullAddress": "Китай, No. 436 Changjiang Middle Road, Jincheng Building, Hefei Anhui, GLN 6972392460004",
+                "gln": "6972392460004",
+                "foreignDistrict": "No. 436 Changjiang Middle Road, Jincheng Building, Hefei Anhui",
+                "foreignCity": null,
                 "foreignLocality": null,
                 "foreignStreet": null,
                 "foreignHouse": null,
@@ -165,8 +163,8 @@
     },
     "manufacturerFilials": [
         {
-            "idFilial": 16813078,
-            "fullName": "Адрес места осуществления деятельности по изготовлению продукции: «CNF CO., LTD»,",
+            "idFilial": 16822511,
+            "fullName": null,
             "shortName": null,
             "idLegalForm": null,
             "idKopf": null,
@@ -177,9 +175,9 @@
             "contacts": [],
             "addresses": [
                 {
-                    "idAddress": 82643856,
+                    "idAddress": 82670368,
                     "idAddrType": 3,
-                    "idCodeOksm": "410",
+                    "idCodeOksm": "156",
                     "oksmShort": true,
                     "idSubject": null,
                     "idDistrict": null,
@@ -189,10 +187,10 @@
                     "idHouse": null,
                     "flat": null,
                     "postCode": null,
-                    "fullAddress": "Корея, Республика, 29, GONGDAN-RO 140BEONAN-GIL, GUNPO-SI, GYEONGGI-DO, 15845",
-                    "gln": null,
-                    "foreignDistrict": null,
-                    "foreignCity": "29, GONGDAN-RO 140BEONAN-GIL, GUNPO-SI, GYEONGGI-DO, 15845",
+                    "fullAddress": "Китай, No. 436 Changjiang Middle Road, Jincheng Building, Hefei Anhui, GLN 6972392460004",
+                    "gln": "6972392460004",
+                    "foreignDistrict": "No. 436 Changjiang Middle Road, Jincheng Building, Hefei Anhui",
+                    "foreignCity": null,
                     "foreignLocality": null,
                     "foreignStreet": null,
                     "foreignHouse": null,
@@ -206,57 +204,69 @@
     "certificationAuthority": null,
     "accreditationBody": null,
     "product": {
-        "idProduct": 14167327,
-        "idProductOrigin": "410",
-        "fullName": "Средства косметические для ухода за кожей, в наборах и отдельными предметами, в том числе образцы-пробники (семплы, саше): Успокаивающий крем для чувствительной кожи лица SCINIC «The Simple Relief Water Cream»",
+        "idProduct": 14172241,
+        "idProductOrigin": "156",
+        "fullName": "Изделия 3-го слоя верхние швейные для мальчиков от 7 до 15 лет, из тканей из синтетических нитей, на подкладке из тканей из синтетических нитей, с синтетическим утеплителем",
         "marking": null,
         "usageScope": null,
-        "storageCondition": "Условия хранения: хранить при температуре от +5° до +25°С в недоступном для детей месте. Не подвергать воздействию прямых солнечных лучей. Срок годности продукции с даты изготовления не менее 30 месяцев. Срок годности продукции с даты вскрытия потребительской упаковки 12 месяцев. Договор с иностранным изготовителем, предусматривающий обеспечение соответствия поставляемой на таможенную территорию Союза продукции требованиям технического регламента № 16-MK22/SC от 19.08.2022 г.",
+        "storageCondition": "",
         "usageCondition": null,
-        "batchSize": null,
+        "batchSize": "4602 штуки",
         "batchId": null,
         "identification": null,
         "identifications": [
             {
-                "idIdentification": 15977724,
+                "idIdentification": 15983606,
                 "annex": false,
-                "name": "Средства косметические для ухода за кожей, в наборах и отдельными предметами, в том числе образцы-пробники (семплы, саше): Успокаивающий крем для чувствительной кожи лица SCINIC «The Simple Relief Water Cream»",
+                "name": "куртки",
                 "type": null,
-                "tradeMark": "Товарный знак SCINIC",
+                "tradeMark": "«SELA», «moms & monsters»",
                 "model": null,
-                "article": null,
+                "article": "3809071160",
                 "sort": null,
                 "idOkpds": [],
                 "idTnveds": [
-                    64954
+                    68711
                 ],
                 "gtin": [
                     ""
                 ],
                 "lifeTime": null,
                 "storageTime": null,
-                "description": "Декларация о соответствии распространяется на продукцию, изготовленную после 13.07.2022 г.",
-                "amount": null,
+                "description": "Пп. 5.2.3, 5.4.3, 5.4.4 ГОСТ 25295-2003 «Одежда верхняя пальтово-костюмного ассортимента. Общие технические условия». Изделия необходимо хранить в защищенных от прямого попадания солнечных лучей и атмосферных воздействий крытых складских помещениях. Изделия до реализации необходимо хранить размещенными на стеллажах в индивидуальной или групповой таре. Расстояние от пола до нижней части полки стеллажа, от внутренних и наружных стен до изделия должно быть не менее 0,2 м, от отопительных приборов до изделия - не менее 1 м, между стеллажами - не менее 0,7 м. Срок хранения, срок службы (годности) не установлен.",
+                "amount": "Партия: 4602 штуки. Договор № 3535-156 от 01.07.2022 года, Инвойс № AY23ZCDG307018 от 06.05.2023 года",
                 "idOkei": null,
                 "factoryNumber": null,
                 "productionDate": null,
                 "expiryDate": null,
                 "documents": [],
-                "standards": []
+                "standards": [
+                    {
+                        "idStandard": 8956355,
+                        "idTechnicalRegulation": null,
+                        "annex": false,
+                        "idDictStandard": 39,
+                        "designation": "ТР ТС 007/2011",
+                        "name": "О безопасности продукции, предназначенной для детей и подростков",
+                        "section": null,
+                        "addlInfo": null,
+                        "idStatus": 2
+                    }
+                ]
             }
         ]
     },
     "experts": [],
     "statusChanges": [
         {
-            "idChangeStatus": 23680534,
+            "idChangeStatus": 23694235,
             "idStatus": 20,
-            "beginDate": "2023-05-15T10:19:35.786",
-            "endDate": "2023-05-15T23:31:17.318",
+            "beginDate": "2023-05-16T09:30:41.196",
+            "endDate": "2023-05-16T10:16:52.71",
             "comment": null,
             "idBasis": null,
             "publicated": true,
-            "publishDate": "2023-05-15T23:31:20.027",
+            "publishDate": "2023-05-16T10:16:54.032",
             "lkType": null,
             "docName": null,
             "docNumber": null,
@@ -269,14 +279,14 @@
             "idOngoingEvent": null
         },
         {
-            "idChangeStatus": 23687913,
+            "idChangeStatus": 23694655,
             "idStatus": 6,
-            "beginDate": "2023-05-15T23:31:17.318",
+            "beginDate": "2023-05-16T10:16:52.71",
             "endDate": null,
             "comment": null,
             "idBasis": null,
             "publicated": true,
-            "publishDate": "2023-05-15T23:31:20.027",
+            "publishDate": "2023-05-16T10:16:54.032",
             "lkType": null,
             "docName": null,
             "docNumber": null,
@@ -291,20 +301,20 @@
     ],
     "testingLabs": [
         {
-            "idTestingLab": 18873458,
+            "idTestingLab": 18879093,
             "annex": false,
             "idRal": null,
-            "regNumber": "RA.RU.21НМ94",
-            "fullName": "Испытательная лаборатория Общества с ограниченной ответственностью \n «Международная сертификационная компания Таможенного союза»",
-            "beginDate": "2018-11-08",
+            "regNumber": null,
+            "fullName": "\"Waltek Services (Foshan) Co., Ltd.\"",
+            "beginDate": null,
             "endDate": null,
             "basis": null,
             "idAccredPlace": "643",
             "isAccredEec": true,
             "address": {
-                "idAddress": 82643858,
+                "idAddress": 82671547,
                 "idAddrType": 3,
-                "idCodeOksm": "643",
+                "idCodeOksm": "156",
                 "oksmShort": true,
                 "idSubject": null,
                 "idDistrict": null,
@@ -314,9 +324,9 @@
                 "idHouse": null,
                 "flat": null,
                 "postCode": null,
-                "fullAddress": "Российская Федерация",
+                "fullAddress": "КИТАЙ, No.13-19, 2/F., 2nd Building, Sunlink International Machinery City, Chencun, Shunde District, Foshan, Guangdong",
                 "gln": null,
-                "foreignDistrict": null,
+                "foreignDistrict": "No.13-19, 2/F., 2nd Building, Sunlink International Machinery City, Chencun, Shunde District, Foshan, Guangdong",
                 "foreignCity": null,
                 "foreignLocality": null,
                 "foreignStreet": null,
@@ -327,151 +337,33 @@
             },
             "protocols": [
                 {
-                    "idProtocol": 9811557,
-                    "idProtocolRpi": 243489612,
-                    "number": "879/03/23/02",
-                    "date": "2023-04-12",
-                    "idFile": "f423d881-8679-40fc-b82d-2cc87e1ba8d1",
-                    "standards": [],
+                    "idProtocol": 9818811,
+                    "idProtocolRpi": null,
+                    "number": "ZH23PO446",
+                    "date": "2023-05-05",
+                    "idFile": "61c4c74d-3e3d-4eb3-9789-c8f26b2d13be",
+                    "standards": [
+                        {
+                            "idStandard": 8956525,
+                            "idTechnicalRegulation": null,
+                            "annex": false,
+                            "idDictStandard": 39,
+                            "designation": "ТР ТС 007/2011",
+                            "name": "О безопасности продукции, предназначенной для детей и подростков",
+                            "section": null,
+                            "addlInfo": null,
+                            "idStatus": 2
+                        }
+                    ],
                     "isProtocolInvalid": false
                 }
             ],
-            "importedForResearchTesting": true,
+            "importedForResearchTesting": false,
             "docConfirmCustom": [
                 {
-                    "idDocConfirmCustom": 1762376,
-                    "idDocConfirmCustomType": 1,
-                    "customInfo": [
-                        {
-                            "idCustomInfo": 943241,
-                            "customDeclNumber": "10005030/230123/3016931",
-                            "amount": null,
-                            "idMeasure": null,
-                            "otherMeasure": null,
-                            "contractNumber": null,
-                            "contractDate": null,
-                            "idAccredPlace": "643",
-                            "isAccredEec": true,
-                            "accreditedPersonName": null,
-                            "attestatRegNumber": null
-                        }
-                    ],
-                    "otherDocs": [],
-                    "reasonNonRegistrCustomsDeclaration": null
-                },
-                {
-                    "idDocConfirmCustom": 1762377,
-                    "idDocConfirmCustomType": 1,
-                    "customInfo": [
-                        {
-                            "idCustomInfo": 943242,
-                            "customDeclNumber": "10005030/230123/3016931",
-                            "amount": null,
-                            "idMeasure": null,
-                            "otherMeasure": null,
-                            "contractNumber": null,
-                            "contractDate": null,
-                            "idAccredPlace": "643",
-                            "isAccredEec": true,
-                            "accreditedPersonName": null,
-                            "attestatRegNumber": null
-                        }
-                    ],
-                    "otherDocs": [],
-                    "reasonNonRegistrCustomsDeclaration": null
-                }
-            ],
-            "ogrn": null,
-            "inn": null,
-            "accredEec": true
-        },
-        {
-            "idTestingLab": 18873457,
-            "annex": false,
-            "idRal": null,
-            "regNumber": "RA.RU.21НН96",
-            "fullName": "Испытательный лабораторный центр Федерального бюджетного учреждения здравоохранения \"Центр гигиены и эпидемиологии в городе Москве\"",
-            "beginDate": "2018-12-27",
-            "endDate": null,
-            "basis": null,
-            "idAccredPlace": "643",
-            "isAccredEec": true,
-            "address": {
-                "idAddress": 82643857,
-                "idAddrType": 3,
-                "idCodeOksm": "643",
-                "oksmShort": true,
-                "idSubject": null,
-                "idDistrict": null,
-                "idCity": null,
-                "idLocality": null,
-                "idStreet": null,
-                "idHouse": null,
-                "flat": null,
-                "postCode": null,
-                "fullAddress": "Российская Федерация",
-                "gln": null,
-                "foreignDistrict": null,
-                "foreignCity": null,
-                "foreignLocality": null,
-                "foreignStreet": null,
-                "foreignHouse": null,
-                "uniqueAddress": null,
-                "otherGln": null,
-                "glonass": null
-            },
-            "protocols": [
-                {
-                    "idProtocol": 9811556,
-                    "idProtocolRpi": 243067885,
-                    "number": "42.23.03244",
-                    "date": "2023-04-03",
-                    "idFile": "2be093af-6a2b-4f4c-b3aa-10df712f000e",
-                    "standards": [],
-                    "isProtocolInvalid": false
-                }
-            ],
-            "importedForResearchTesting": true,
-            "docConfirmCustom": [
-                {
-                    "idDocConfirmCustom": 1762374,
-                    "idDocConfirmCustomType": 1,
-                    "customInfo": [
-                        {
-                            "idCustomInfo": 943239,
-                            "customDeclNumber": "10005030/230123/3016931",
-                            "amount": null,
-                            "idMeasure": null,
-                            "otherMeasure": null,
-                            "contractNumber": null,
-                            "contractDate": null,
-                            "idAccredPlace": "643",
-                            "isAccredEec": true,
-                            "accreditedPersonName": null,
-                            "attestatRegNumber": null
-                        }
-                    ],
-                    "otherDocs": [],
-                    "reasonNonRegistrCustomsDeclaration": null
-                },
-                {
-                    "idDocConfirmCustom": 1762375,
-                    "idDocConfirmCustomType": 1,
-                    "customInfo": [
-                        {
-                            "idCustomInfo": 943240,
-                            "customDeclNumber": "10005030/230123/3016931",
-                            "amount": null,
-                            "idMeasure": null,
-                            "otherMeasure": null,
-                            "contractNumber": null,
-                            "contractDate": null,
-                            "idAccredPlace": "643",
-                            "isAccredEec": true,
-                            "accreditedPersonName": null,
-                            "attestatRegNumber": null
-                        }
-                    ],
+                    "idDocConfirmCustom": 1768178,
+                    "idDocConfirmCustomType": 3,
+                    "customInfo": [],
                     "otherDocs": [],
                     "reasonNonRegistrCustomsDeclaration": null
                 }
@@ -520,10 +412,29 @@
             "attestatEndDate": null,
             "idFile": null
         },
-        "applicantOtherDocuments": []
+        "applicantOtherDocuments": [
+            {
+                "idApplicantOtherDocument": 2897721,
+                "annex": false,
+                "name": "Договор № 3535-156 от 01.07.2022",
+                "number": "3535-156",
+                "date": "2022-07-01",
+                "idCategory": 2,
+                "idFile": null
+            },
+            {
+                "idApplicantOtherDocument": 2897722,
+                "annex": false,
+                "name": "Инвойс  № ???????? от 20.04.2023",
+                "number": "????????",
+                "date": "2023-04-20",
+                "idCategory": 1,
+                "idFile": null
+            }
+        ]
     },
     "isSrd": true,
-    "idStatusTestingLabs": 2,
+    "idStatusTestingLabs": 4,
     "idReplacementReason": [],
     "idDeclarationReplaced": null,
     "idDeclarationRegInstead": null,
