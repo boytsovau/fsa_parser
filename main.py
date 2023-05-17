@@ -1,6 +1,7 @@
 import requests
 from fake_useragent import UserAgent
 import json
+from auth import get_auth
 
 
 ua = UserAgent()
@@ -29,7 +30,8 @@ def get_cookies(url):
 
 
 def main():
-    get_cookies(url="https://pub.fsa.gov.ru/lk/api/account")
+    print(get_auth())
+
 
 
 if __name__ == '__main__':
