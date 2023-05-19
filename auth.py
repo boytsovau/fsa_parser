@@ -28,7 +28,11 @@ json_data = {
 
 
 def get_auth(url='https://pub.fsa.gov.ru/login'):
-    response = requests.post(url, headers=headers, json=json_data, verify=False)
+    response = requests.post(
+        url,
+        headers=headers,
+        json=json_data,
+        verify=False)
     data = dict(response.headers)
     return data.get('Authorization')
 

@@ -3,11 +3,15 @@ from fake_useragent import UserAgent
 import json
 from auth import get_auth
 
-def main():
+
+def get_all_declaration():
+
+    """Функция запрашивает все декларации,
+    которые были выпущены за текущий день"""
 
     ua = UserAgent()
 
-    Authorization = get_auth()
+    Authorization = get_auth()  # Забираем токен авторизации
 
     headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -23,7 +27,7 @@ def main():
     }
 
     json_data = {
-        'size': 10000,
+        'size': 1000000,
         'page': 0,
         'filter': {
             'status': [],
@@ -82,43 +86,42 @@ def main():
         verify=False,
     )
 
-    with open(f'data.json', "w" ) as file:
-        json.dump(response.json(),file, indent =4, ensure_ascii=False)
- 
+    with open('data.json', "w") as file:
+        json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
 def count_id_declaration():
     collected_id = {}
-    with open('data.json') as file: 
+    with open('data.json') as file:
         text = json.load(file)
 
     index = 0
     id = text.get('items')
     for item in id:
         declaration_id = item.get('id')
-        declaration_number  = item.get('number')
+        declaration_number = item.get('number')
 
         collected_id[index] = {
-            'id' : declaration_id,
-            'number' : declaration_number
+            'id': declaration_id,
+            'number': declaration_number
         }
         index += 1
 
-    with open(f'ids_and_number.json', "w") as file:
+    with open('ids_and_number.json', "w") as file:
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
-def test():
-
-    with open('ids_and_number.json') as file: 
-        text = json.load(file)
-    
-    result = text.get('20').get('id')
-    print(result)
+# def test():
+#     with open('ids_and_number.json') as file:
+#         text = json.load(file)
+#     result = text.get('20').get('id')
+#     print(result)
 
 
+def main():
+    get_all_declaration()
+    count_id_declaration()
 
 if __name__ == "__main__":
-    # main()
+    main()
     # count_id_declaration()
-    test()
-
+    # test()
