@@ -1,21 +1,9 @@
 import requests
-from fake_useragent import UserAgent
 import json
-from auth import get_auth
-import time
+from day_declaration import get_day_declaration, Authorization, ua
 
-def get_all_declaration():
 
-    """Функция запрашивает все декларации,
-    которые были выпущены за текущий день"""
-
-    ua = UserAgent()
-
-    local_time = time.strftime("%Y-%m-%d")
-    
-    Authorization = get_auth()  # Забираем токен авторизации
-
-    headers = {
+headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
         'Authorization': f'{Authorization}',
@@ -28,8 +16,13 @@ def get_all_declaration():
         'User-Agent': f'{ua.random}',
     }
 
+
+def get_declaration():
+
+    """Функция запрашивает информацию по декларации"""
+
     json_data = {
-        'size': 1000000,
+        'size': 10,
         'page': 0,
         'filter': {
             'status': [],
@@ -41,7 +34,7 @@ def get_all_declaration():
             'idTechReg': [],
             'idApplicantType': [],
             'regDate': {
-                'minDate': f'{local_time}',
+                'minDate': None,
                 'maxDate': None,
             },
             'endDate': {
@@ -51,7 +44,7 @@ def get_all_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': '',
+                    'search': 'ЕАЭС N RU Д-ID.РА04.В.00364/23',
                     'type': 9,
                     'translated': False,
                 },
@@ -88,45 +81,29 @@ def get_all_declaration():
         verify=False,
     )
 
-    with open('data.json', "w") as file:
+    with open('data_one_dec.json', "w") as file:
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
 def count_id_declaration():
-    collected_id = {}
-    with open('data.json') as file:
+    with open('data_one_dec.json') as file:
         text = json.load(file)
+    id = text.get('items')[0].get('id')
 
-    index = 0
-    id = text.get('items')
-    for item in id:
-        declaration_id = item.get('id')
-        declaration_number = item.get('number')
+    response = requests.get(
+        url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{id}',
+        headers=headers,
+        verify=False)
 
-        collected_id[index] = {
-            'id': declaration_id,
-            'number': declaration_number
-        }
-        index += 1
-
-    with open('ids_and_number.json', "w") as file:
-        json.dump(collected_id, file, indent=4, ensure_ascii=False)
-
-
-def test():
-#     with open('ids_and_number.json') as file:
-#         text = json.load(file)
-#     result = text.get('20').get('id')
-#     print(result)
+    with open('data_full_dec.json', "w") as file:
+        json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
 def main():
-    get_all_declaration()
+    get_day_declaration()
+    get_declaration()
     count_id_declaration()
-    # test()
 
 
 if __name__ == "__main__":
     main()
-    # count_id_declaration()
-
