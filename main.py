@@ -3,36 +3,122 @@ from fake_useragent import UserAgent
 import json
 from auth import get_auth
 
-
-ua = UserAgent()
-
-headers = {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json',
-    'User-Agent': f'{ua.random}',
-    'Origin': 'https://pub.fsa.gov.ru'
-    
-}
-
-json_data = {
-    'username': 'anonymous',
-}
-
-def get_cookies(url):
-    response = requests.get(url, headers=headers, verify=False)
-
-    with open(f'login.json', "w") as file:
-        json.dump(response.json(), file, indent=4, ensure_ascii=False)
-
-
-    # with open(f'cook.txt ', "w") as file:
-    #     file.write(response.text)
-
-
 def main():
-    print(get_auth())
+
+    ua = UserAgent()
+
+    Authorization = get_auth()
+
+    headers = {
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Authorization': f'{Authorization}',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'Origin': 'https://pub.fsa.gov.ru',
+        'Pragma': 'no-cache',
+        'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
+        'User-Agent': f'{ua.random}',
+    }
+
+    json_data = {
+        'size': 10000,
+        'page': 0,
+        'filter': {
+            'status': [],
+            'idDeclType': [],
+            'idCertObjectType': [],
+            'idProductType': [],
+            'idGroupRU': [],
+            'idGroupEEU': [],
+            'idTechReg': [],
+            'idApplicantType': [],
+            'regDate': {
+                'minDate': "2023-05-19",
+                'maxDate': None,
+            },
+            'endDate': {
+                'minDate': None,
+                'maxDate': None,
+            },
+            'columnsSearch': [
+                {
+                    'name': 'number',
+                    'search': '',
+                    'type': 9,
+                    'translated': False,
+                },
+            ],
+            'idProductOrigin': [],
+            'idProductEEU': [],
+            'idProductRU': [],
+            'idDeclScheme': [],
+            'awaitForApprove': None,
+            'awaitOperatorCheck': None,
+            'editApp': None,
+            'violationSendDate': None,
+            'isProtocolInvalid': None,
+            'resultChecker': None,
+            'statusChecker': None,
+            'protocolsChecker': None,
+            'mistakeFound': None,
+        },
+        'columnsSort': [
+            {
+                'column': 'declDate',
+                'sort': 'DESC',
+            },
+        ],
+    }
+
+    s = requests.session()
+
+    response = s.post(
+        'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
+        # cookies=cookies,
+        headers=headers,
+        json=json_data,
+        verify=False,
+    )
+
+    with open(f'data.json', "w" ) as file:
+        json.dump(response.json(),file, indent =4, ensure_ascii=False)
+ 
+
+
+def count_id_declaration():
+    collected_id = {}
+    with open('data.json') as file: 
+        text = json.load(file)
+
+    index = 0
+    id = text.get('items')
+    for item in id:
+        declaration_id = item.get('id')
+        declaration_number  = item.get('number')
+
+        collected_id[index] = {
+            'id' : declaration_id,
+            'number' : declaration_number
+        }
+        index += 1
+
+    with open(f'ids_and_number.json', "w") as file:
+        json.dump(collected_id, file, indent=4, ensure_ascii=False)
+
+def test():
+
+    with open('ids_and_number.json') as file: 
+        text = json.load(file)
+    
+    result = text.get('20').get('id')
+    print(result)
 
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    # main()
+    # count_id_declaration()
+    test()
+
