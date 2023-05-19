@@ -104,14 +104,24 @@ def count_id_declaration():
     for item in id:
         declaration_id = item.get('id')
         declaration_number = item.get('number')
+        date_regist = item.get('declDate')
+        date_issue = item.get('declEndDate')
+        applicant = item.get('applicantName')
+        manufacturer = item.get('manufacterName')
+        product_name = item.get('productFullName')
 
         collected_id[index] = {
             'id': declaration_id,
-            'number': declaration_number
+            'number': declaration_number,
+            'Register Date': date_regist,
+            'Issue Date': date_issue,
+            'Applicant': applicant,
+            'Manufacturer': manufacturer,
+            'Production': product_name
         }
         index += 1
 
-    with open('ids_and_number.json', "w") as file:
+    with open('id_and_number.json', "w") as file:
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
 
