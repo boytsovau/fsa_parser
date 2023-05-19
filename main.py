@@ -2,7 +2,7 @@ import requests
 from fake_useragent import UserAgent
 import json
 from auth import get_auth
-
+import time
 
 def get_all_declaration():
 
@@ -11,6 +11,8 @@ def get_all_declaration():
 
     ua = UserAgent()
 
+    local_time = time.strftime("%Y-%m-%d")
+    
     Authorization = get_auth()  # Забираем токен авторизации
 
     headers = {
@@ -39,7 +41,7 @@ def get_all_declaration():
             'idTechReg': [],
             'idApplicantType': [],
             'regDate': {
-                'minDate': "2023-05-19",
+                'minDate': f'{local_time}',
                 'maxDate': None,
             },
             'endDate': {
@@ -110,7 +112,8 @@ def count_id_declaration():
     with open('ids_and_number.json', "w") as file:
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
-# def test():
+
+def test():
 #     with open('ids_and_number.json') as file:
 #         text = json.load(file)
 #     result = text.get('20').get('id')
@@ -120,8 +123,10 @@ def count_id_declaration():
 def main():
     get_all_declaration()
     count_id_declaration()
+    # test()
+
 
 if __name__ == "__main__":
     main()
     # count_id_declaration()
-    # test()
+
