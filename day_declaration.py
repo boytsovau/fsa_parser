@@ -116,7 +116,7 @@ def count_id_declaration():
 
 
 def main():
-    get_day_declaration()
+    # get_day_declaration()
     count_id_declaration()
 
 
