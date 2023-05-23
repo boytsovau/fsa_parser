@@ -1,0 +1,48 @@
+{
+    "validationFormNormDoc": [
+        {
+            "id": 23,
+            "masterId": "23",
+            "docNum": "ТР ТС 029/2012",
+            "name": "Требования безопасности пищевых добавок, ароматизаторов и технологических вспомогательных средств"
+        },
+        {
+            "id": 27,
+            "masterId": "27",
+            "docNum": "ТР ТС 021/2011",
+            "name": "О безопасности пищевой продукции"
+        },
+        {
+            "id": 97161,
+            "masterId": "97161",
+            "docNum": "ТР ТС 022/2011",
+            "name": "Пищевая продукция в части ее маркировки"
+        }
+    ],
+    "validationScheme2": [
+        {
+            "isApplicantProvider": true,
+            "isPresenceOfProxy": true,
+            "name": "1д",
+            "isApplicantEeuMember": true,
+            "masterId": "126",
+            "isApplicantForeign": true,
+            "isOneOffProductTesting": false,
+            "isAccreditationLab": false,
+            "isBatchProductTesting": false,
+            "isProductSampleTesting": true,
+            "isBatchProduction": false,
+            "isSeriesProduction": true,
+            "id": 126,
+            "isApplicantManufacturer": true,
+            "isOneOffProduction": false
+        }
+    ],
+    "techregProductListEEU": [
+        {
+            "name": "Сахаристые кондитерские изделия (в том числе диабетические), восточные сладости, жевательная резинка",
+            "id": 18127,
+            "techRegId": 27
+        }
+    ]
+}

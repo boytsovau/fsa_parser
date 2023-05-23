@@ -94,7 +94,7 @@ def get_day_declaration():
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
-def count_id_declaration():
+def get_declaration_day_sorted():
     collected_id = {}
     with open('data.json') as file:
         text = json.load(file)
@@ -126,8 +126,8 @@ def count_id_declaration():
 
 
 def main():
-    # get_day_declaration()
-    count_id_declaration()
+    get_day_declaration()
+    get_declaration_day_sorted()
 
 
 if __name__ == "__main__":

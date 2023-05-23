@@ -1,7 +1,6 @@
 import requests
 import json
-from day_declaration import get_day_declaration, Authorization, ua
-
+from day_declaration import get_day_declaration, get_declaration_day_sorted, Authorization, ua
 
 headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -85,10 +84,15 @@ def get_declaration():
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
-def count_id_declaration():
+def get_id_declaration():
     with open('data_one_dec.json') as file:
         text = json.load(file)
     id = text.get('items')[0].get('id')
+    return id
+
+
+def count_id_declaration():
+    id = get_id_declaration()
 
     response = requests.get(
         url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{id}',
@@ -103,6 +107,7 @@ def main():
     get_day_declaration()
     get_declaration()
     count_id_declaration()
+    get_declaration_day_sorted()
 
 
 if __name__ == "__main__":
