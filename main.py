@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from auth import ua, Authorization
 from multi import get_multi_info
 
@@ -20,6 +21,9 @@ headers = {
 def get_declaration():
 
     """Функция запрашивает информацию по декларации"""
+
+    if not os.path.exists('data'):
+        os.mkdir('data')
 
     json_data = {
         'size': 10,
