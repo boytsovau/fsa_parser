@@ -86,6 +86,9 @@ def get_declaration():
 
 
 def get_declaration_sorted():
+    """Функция вытягивает только нужные для нас поля
+    из общих данных по декларации"""
+
     collected_id = {}
     declaration = []
     with open('data_one_dec.json') as file:
@@ -128,6 +131,10 @@ def get_id_declaration():
 
 
 def get_one_full_declaraion():
+    """Функция забирает более полные данные по выданой декларации.
+    Далее в теле используем функцию get_multi_info() в которой
+    формируется файл с информацией о схеме декларирования"""
+
     id = get_id_declaration()
 
     response = requests.get(
@@ -147,6 +154,8 @@ def get_one_full_declaraion():
 
 
 def get_result_declaration():
+    """Формируем итоговый файл с нужными данными"""
+
     with open('dec_find.json') as file:
         declaration = json.load(file)
 
