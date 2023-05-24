@@ -1,15 +1,16 @@
 import requests
 import json
-from day_declaration import Authorization, ua
+from auth import ua, get_auth
 
 
-def get_multi_info():
-    with open('data_full_dec.json') as file:
-        text = json.load(file)
-        Scheme = text.get('idDeclScheme')
-        Reglaments = text.get('idTechnicalReglaments')
-        id = text.get('idDeclaration')
-        print(Scheme, Reglaments)
+Authorization = get_auth()
+
+def get_multi_info(id, scheme, reglaments):
+    # with open('data_full_dec.json') as file:
+    #     text = json.load(file)
+        # Scheme = text.get('idDeclScheme')
+        # Reglaments = text.get('idTechnicalReglaments')
+        # id = text.get('idDeclaration')
 
     headers = {
             'Accept': 'application/json, text/plain, */*',
@@ -28,7 +29,7 @@ def get_multi_info():
         'items': {
             'validationFormNormDoc': [
                 {
-                    'id': Reglaments,
+                    'id': reglaments,
                     'fields': [
                         'id',
                         'masterId',
@@ -40,7 +41,7 @@ def get_multi_info():
             'validationScheme2': [
                 {
                     'id': [
-                        f'{Scheme}',
+                        f'{scheme}',
                     ],
                     'fields': [
                         'id',
@@ -62,19 +63,6 @@ def get_multi_info():
                     ],
                 },
             ],
-            'techregProductListEEU': [
-                {
-                    'id': [
-                        18127,
-                    ],
-                    'fields': [
-                        'id',
-                        'masterId',
-                        'name',
-                        'techRegId',
-                    ],
-                },
-            ],
         },
     }
 
@@ -82,10 +70,15 @@ def get_multi_info():
         'https://pub.fsa.gov.ru/nsi/api/multi',
         json=json_data,
         headers=headers,
-        verify=False)
+        verify=False).json()
+
+    data_full = {}
+    decl_scheme = response.get("validationScheme2")[0].get('name')
+    data_full['id'] = {id: {'scheme': decl_scheme}}
 
     with open('multi.json', "w") as file:
-        json.dump(response.json(), file, indent=4, ensure_ascii=False)
+        json.dump(data_full, file, indent=4, ensure_ascii=False)
+    return data_full
 
 
 def main():

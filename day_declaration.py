@@ -3,6 +3,7 @@ from fake_useragent import UserAgent
 import json
 from auth import get_auth
 import time
+from multi import get_multi_info
 
 
 ua = UserAgent()
@@ -94,13 +95,17 @@ def get_day_declaration():
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
-def get_declaration_day_sorted():
+def get_declaration_sorted():
+    """Данная функиця собирает только нужную информацию по декларациям,
+    которые выпущены за день"""
+
     collected_id = {}
+    declaration = []
     with open('data.json') as file:
         text = json.load(file)
 
-    index = 0
     id = text.get('items')
+
     for item in id:
         declaration_id = item.get('id')
         declaration_number = item.get('number')
@@ -110,7 +115,7 @@ def get_declaration_day_sorted():
         manufacturer = item.get('manufacterName')
         product_name = item.get('productFullName')
 
-        collected_id[index] = {
+        declaration.append({
             'id': declaration_id,
             'number': declaration_number,
             'Register Date': date_regist,
@@ -118,16 +123,54 @@ def get_declaration_day_sorted():
             'Applicant': applicant,
             'Manufacturer': manufacturer,
             'Production': product_name
-        }
-        index += 1
+            }
+        )
+        collected_id['declaration'] = declaration
 
-    with open('id_and_number.json', "w") as file:
+    with open('detailed_declaraion.json', "w") as file:
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
 
+def get_id_declaration():
+    id_declaration = []
+    with open('detailed_declaraion.json') as file:
+        text = json.load(file)
+    for i in text:
+        id = text.get(i).get('id')
+        id_declaration.append(id)
+    return id_declaration
+
+
+def get_one_full_declaraion():
+    id = get_id_declaration()
+
+    with open('detailed_declaraion.json') as file:
+        declaration = json.load(file)
+
+    for i in id:
+        response = requests.get(
+            url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{i}',
+            headers=headers,
+            verify=False).json()
+
+        scheme = response.get('idDeclScheme')
+        reglaments = response.get('idTechnicalReglaments')
+        multi = get_multi_info(i, scheme, reglaments)
+    
+    for items in declaration.values():
+        dec_id = items.get('id')
+        scheme_dec = multi.get('id').get(dec_id).get('scheme')
+        items['Схема'] = scheme_dec
+
+    with open('result_day.json', "w") as file:
+        json.dump(declaration, file, indent=4, ensure_ascii=False)
+
+
 def main():
-    get_day_declaration()
-    get_declaration_day_sorted()
+    # get_day_declaration()
+    # get_declaration_sorted()
+    # get_id_declaration()
+    get_one_full_declaraion()
 
 
 if __name__ == "__main__":

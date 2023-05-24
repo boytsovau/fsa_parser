@@ -1,6 +1,7 @@
 import requests
 import json
-from day_declaration import get_day_declaration, get_declaration_day_sorted, Authorization, ua
+from day_declaration import Authorization, ua
+from multi import get_multi_info
 
 headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -43,7 +44,7 @@ def get_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': 'ЕАЭС N RU Д-ID.РА04.В.00364/23',
+                    'search': 'ЕАЭС N RU Д-ES.РА04.В.11330/23',
                     'type': 9,
                     'translated': False,
                 },
@@ -84,6 +85,41 @@ def get_declaration():
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
+def get_declaration_sorted():
+    collected_id = {}
+    declaration = []
+    with open('data_one_dec.json') as file:
+        text = json.load(file)
+
+    index = 0
+    id = text.get('items')
+
+    for item in id:
+        declaration_id = item.get('id')
+        declaration_number = item.get('number')
+        date_regist = item.get('declDate')
+        date_issue = item.get('declEndDate')
+        applicant = item.get('applicantName')
+        manufacturer = item.get('manufacterName')
+        product_name = item.get('productFullName')
+
+        declaration.append({
+            'id': declaration_id,
+            'number': declaration_number,
+            'Register Date': date_regist,
+            'Issue Date': date_issue,
+            'Applicant': applicant,
+            'Manufacturer': manufacturer,
+            'Production': product_name
+            }
+        )
+        collected_id['declaration'] = declaration
+        index += 1
+
+    with open('dec_find.json', "w") as file:
+        json.dump(collected_id, file, indent=4, ensure_ascii=False)
+
+
 def get_id_declaration():
     with open('data_one_dec.json') as file:
         text = json.load(file)
@@ -91,23 +127,47 @@ def get_id_declaration():
     return id
 
 
-def count_id_declaration():
+def get_one_full_declaraion():
     id = get_id_declaration()
 
     response = requests.get(
         url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{id}',
         headers=headers,
-        verify=False)
+        verify=False).json()
 
-    with open('data_full_dec.json', "w") as file:
-        json.dump(response.json(), file, indent=4, ensure_ascii=False)
+    scheme = response.get('idDeclScheme')
+    reglaments = response.get('idTechnicalReglaments')
+
+    result = get_multi_info(id, scheme, reglaments)
+
+    return result
+
+    # with open('data_full_dec.json', "w") as file:
+    #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
+
+
+def get_result_declaration():
+    with open('dec_find.json') as file:
+        declaration = json.load(file)
+
+    with open('multi.json') as file:
+        multi = json.load(file)
+
+    for items in declaration.values():
+        for i in items:
+            dec_id = i.get('id')
+            scheme_dec = multi.get('id').get(f'{dec_id}').get('scheme')
+            i['Схема'] = scheme_dec
+
+    with open('result.json', "w") as file:
+        json.dump(declaration, file, indent=4, ensure_ascii=False)
 
 
 def main():
-    get_day_declaration()
     get_declaration()
-    count_id_declaration()
-    get_declaration_day_sorted()
+    get_declaration_sorted()
+    get_one_full_declaraion()
+    get_result_declaration()
 
 
 if __name__ == "__main__":
