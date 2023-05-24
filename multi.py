@@ -1,9 +1,7 @@
 import requests
 import json
-from auth import ua, get_auth
+from auth import ua, Authorization
 
-
-Authorization = get_auth()
 
 def get_multi_info(id, scheme, reglaments):
     # with open('data_full_dec.json') as file:

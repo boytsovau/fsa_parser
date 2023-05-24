@@ -1,6 +1,6 @@
 import requests
 import json
-from day_declaration import Authorization, ua
+from auth import ua, Authorization
 from multi import get_multi_info
 
 headers = {
@@ -44,7 +44,7 @@ def get_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': 'ЕАЭС N RU Д-ES.РА04.В.11330/23',
+                    'search': 'ЕАЭС N RU Д-TR.РА04.А.13049/23',
                     'type': 9,
                     'translated': False,
                 },

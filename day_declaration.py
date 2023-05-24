@@ -1,16 +1,11 @@
 import requests
-from fake_useragent import UserAgent
 import json
-from auth import get_auth
 import time
+from auth import ua, Authorization
 from multi import get_multi_info
 
 
-ua = UserAgent()
-
 local_time = time.strftime("%Y-%m-%d")
-
-Authorization = get_auth()  # Забираем токен авторизации
 
 headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -167,10 +162,10 @@ def get_one_full_declaraion():
 
 
 def main():
-    # get_day_declaration()
+    get_day_declaration()
     # get_declaration_sorted()
     # get_id_declaration()
-    get_one_full_declaraion()
+    #get_one_full_declaraion()
 
 
 if __name__ == "__main__":
