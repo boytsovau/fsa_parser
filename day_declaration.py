@@ -86,7 +86,7 @@ def get_day_declaration():
         verify=False,
     )
 
-    with open('data.json', "w") as file:
+    with open('data/data.json', "w") as file:
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
@@ -96,7 +96,7 @@ def get_declaration_sorted():
 
     collected_id = {}
     declaration = []
-    with open('data.json') as file:
+    with open('data/data.json') as file:
         text = json.load(file)
 
     id = text.get('items')
@@ -122,13 +122,13 @@ def get_declaration_sorted():
         )
         collected_id['declaration'] = declaration
 
-    with open('detailed_declaraion.json', "w") as file:
+    with open('data/detailed_declaraion.json', "w") as file:
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
 
 def get_id_declaration():
     id_declaration = []
-    with open('detailed_declaraion.json') as file:
+    with open('data/detailed_declaraion.json') as file:
         text = json.load(file)
     for i in text:
         id = text.get(i).get('id')
@@ -139,7 +139,7 @@ def get_id_declaration():
 def get_one_full_declaraion():
     id = get_id_declaration()
 
-    with open('detailed_declaraion.json') as file:
+    with open('data/detailed_declaraion.json') as file:
         declaration = json.load(file)
 
     for i in id:
@@ -157,15 +157,15 @@ def get_one_full_declaraion():
         scheme_dec = multi.get('id').get(dec_id).get('scheme')
         items['Схема'] = scheme_dec
 
-    with open('result_day.json', "w") as file:
+    with open('data/result_day.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
 
 
 def main():
     get_day_declaration()
-    # get_declaration_sorted()
+    get_declaration_sorted()
     # get_id_declaration()
-    #get_one_full_declaraion()
+    # get_one_full_declaraion()
 
 
 if __name__ == "__main__":

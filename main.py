@@ -81,7 +81,7 @@ def get_declaration():
         verify=False,
     )
 
-    with open('data_one_dec.json', "w") as file:
+    with open('data/data_one_dec.json', "w") as file:
         json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
 
@@ -91,7 +91,7 @@ def get_declaration_sorted():
 
     collected_id = {}
     declaration = []
-    with open('data_one_dec.json') as file:
+    with open('data/data_one_dec.json') as file:
         text = json.load(file)
 
     index = 0
@@ -119,12 +119,12 @@ def get_declaration_sorted():
         collected_id['declaration'] = declaration
         index += 1
 
-    with open('dec_find.json', "w") as file:
+    with open('data/dec_find.json', "w") as file:
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
 
 def get_id_declaration():
-    with open('data_one_dec.json') as file:
+    with open('data/data_one_dec.json') as file:
         text = json.load(file)
     id = text.get('items')[0].get('id')
     return id
@@ -156,10 +156,10 @@ def get_one_full_declaraion():
 def get_result_declaration():
     """Формируем итоговый файл с нужными данными"""
 
-    with open('dec_find.json') as file:
+    with open('data/dec_find.json') as file:
         declaration = json.load(file)
 
-    with open('multi.json') as file:
+    with open('data/multi.json') as file:
         multi = json.load(file)
 
     for items in declaration.values():
@@ -168,7 +168,7 @@ def get_result_declaration():
             scheme_dec = multi.get('id').get(f'{dec_id}').get('scheme')
             i['Схема'] = scheme_dec
 
-    with open('result.json', "w") as file:
+    with open('data/result.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
 
 
