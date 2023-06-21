@@ -1,48 +1,21 @@
 {
-    "validationFormNormDoc": [
-        {
-            "id": 23,
-            "masterId": "23",
-            "docNum": "ТР ТС 029/2012",
-            "name": "Требования безопасности пищевых добавок, ароматизаторов и технологических вспомогательных средств"
-        },
-        {
-            "id": 27,
-            "masterId": "27",
-            "docNum": "ТР ТС 021/2011",
-            "name": "О безопасности пищевой продукции"
-        },
-        {
-            "id": 97161,
-            "masterId": "97161",
-            "docNum": "ТР ТС 022/2011",
-            "name": "Пищевая продукция в части ее маркировки"
-        },
-        {
-            "id": 4516872,
-            "masterId": "4516872",
-            "docNum": "ТР ЕАЭС 051/2021",
-            "name": "О безопасности мяса птицы и продукции его переработки"
-        }
-    ],
     "validationScheme2": [
         {
-            "isApplicantProvider": false,
+            "isApplicantProvider": true,
             "isPresenceOfProxy": true,
             "name": "3д",
-            "isApplicantEeuMember": true,
-            "masterId": "7323",
+            "isApplicantEeuMember": false,
+            "masterId": "46",
             "isApplicantForeign": false,
             "isOneOffProductTesting": false,
             "isAccreditationLab": true,
             "isBatchProductTesting": false,
-            "validityTerm": 3,
             "isProductSampleTesting": true,
-            "isBatchProduction": false,
+            "isBatchProduction": true,
             "isSeriesProduction": true,
-            "id": 7323,
+            "id": 46,
             "isApplicantManufacturer": true,
-            "isOneOffProduction": false
+            "isOneOffProduction": true
         }
     ]
 }

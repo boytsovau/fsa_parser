@@ -138,26 +138,21 @@ def get_id_declaration():
 
 
 def get_one_full_declaraion():
-    id = get_id_declaration()
-
     with open('data/detailed_declaraion.json') as file:
         declaration = json.load(file)
 
-    for i in id:
-        response = requests.get(
-            url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{i}',
-            headers=headers,
-            verify=False).json()
-
-        scheme = response.get('idDeclScheme')
-        reglaments = response.get('idTechnicalReglaments')
-        multi = get_multi_info(i, scheme, reglaments)
-    
-        for items in declaration.values():
-            for i in items:
-                dec_id = i.get('id')
-                scheme_dec = multi.get('id').get(dec_id).get('scheme')
-                i['Схема'] = scheme_dec
+    for items in declaration.values():
+        for i in items[:2]:
+            dec_id = i.get('id')
+            response = requests.get(
+                url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
+                headers=headers,
+                verify=False).json()
+            scheme = response.get('idDeclScheme')
+            reglaments = response.get('idTechnicalReglaments')
+            multi = get_multi_info(dec_id, scheme, reglaments)
+            scheme_dec = multi.get('id').get(dec_id).get('scheme')
+            i['Схема'] = scheme_dec
 
     with open('data/result_day.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
