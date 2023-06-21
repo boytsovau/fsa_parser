@@ -126,15 +126,15 @@ def get_declaration_sorted():
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
 
-def get_id_declaration():
-    id_declaration = []
-    with open('data/detailed_declaraion.json') as file:
-        text = json.load(file)
-    for items in text.values():
-        for i in items:
-            id = i.get('id')
-            id_declaration.append(id)
-    return id_declaration
+# def get_id_declaration():
+#     id_declaration = []
+#     with open('data/detailed_declaraion.json') as file:
+#         text = json.load(file)
+#     for items in text.values():
+#         for i in items:
+#             id = i.get('id')
+#             id_declaration.append(id)
+#     return id_declaration
 
 
 def get_one_full_declaraion():

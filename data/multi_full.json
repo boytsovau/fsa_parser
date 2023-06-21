@@ -1,21 +1,30 @@
 {
+    "validationFormNormDoc": [
+        {
+            "id": 8,
+            "masterId": "8",
+            "docNum": "ТР ТС 017/2011",
+            "name": "О безопасности продукции легкой промышленности"
+        }
+    ],
     "validationScheme2": [
         {
-            "isApplicantProvider": true,
+            "isApplicantProvider": false,
             "isPresenceOfProxy": true,
             "name": "3д",
-            "isApplicantEeuMember": false,
-            "masterId": "46",
+            "isApplicantEeuMember": true,
+            "masterId": "12",
             "isApplicantForeign": false,
             "isOneOffProductTesting": false,
-            "isAccreditationLab": true,
+            "isAccreditationLab": false,
             "isBatchProductTesting": false,
+            "validityTerm": 5,
             "isProductSampleTesting": true,
-            "isBatchProduction": true,
+            "isBatchProduction": false,
             "isSeriesProduction": true,
-            "id": 46,
+            "id": 12,
             "isApplicantManufacturer": true,
-            "isOneOffProduction": true
+            "isOneOffProduction": false
         }
     ]
 }
