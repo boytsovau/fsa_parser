@@ -130,9 +130,10 @@ def get_id_declaration():
     id_declaration = []
     with open('data/detailed_declaraion.json') as file:
         text = json.load(file)
-    for i in text:
-        id = text.get(i).get('id')
-        id_declaration.append(id)
+    for items in text.values():
+        for i in items:
+            id = i.get('id')
+            id_declaration.append(id)
     return id_declaration
 
 
@@ -152,10 +153,11 @@ def get_one_full_declaraion():
         reglaments = response.get('idTechnicalReglaments')
         multi = get_multi_info(i, scheme, reglaments)
     
-    for items in declaration.values():
-        dec_id = items.get('id')
-        scheme_dec = multi.get('id').get(dec_id).get('scheme')
-        items['Схема'] = scheme_dec
+        for items in declaration.values():
+            for i in items:
+                dec_id = i.get('id')
+                scheme_dec = multi.get('id').get(dec_id).get('scheme')
+                i['Схема'] = scheme_dec
 
     with open('data/result_day.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
@@ -165,7 +167,7 @@ def main():
     get_day_declaration()
     get_declaration_sorted()
     # get_id_declaration()
-    # get_one_full_declaraion()
+    get_one_full_declaraion()
 
 
 if __name__ == "__main__":

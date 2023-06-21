@@ -48,7 +48,7 @@ def get_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': 'ЕАЭС N RU Д-TR.РА04.А.13049/23',
+                    'search': 'ЕАЭС N RU Д-US.РА04.А.13301/23',
                     'type': 9,
                     'translated': False,
                 },
@@ -85,8 +85,11 @@ def get_declaration():
         verify=False,
     )
 
-    with open('data/data_one_dec.json', "w") as file:
-        json.dump(response.json(), file, indent=4, ensure_ascii=False)
+    if len(response.json().get('items')) != 0:
+        with open('data/data_one_dec.json', "w") as file:
+            json.dump(response.json(), file, indent=4, ensure_ascii=False)
+    else:
+        return 'Нет информации'
 
 
 def get_declaration_sorted():

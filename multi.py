@@ -74,6 +74,9 @@ def get_multi_info(id, scheme, reglaments):
     decl_scheme = response.get("validationScheme2")[0].get('name')
     data_full['id'] = {id: {'scheme': decl_scheme}}
 
+    with open('data/multi_full.json', "w") as file:
+        json.dump(response, file, indent=4, ensure_ascii=False)
+
     with open('data/multi.json', "w") as file:
         json.dump(data_full, file, indent=4, ensure_ascii=False)
     return data_full
