@@ -18,6 +18,8 @@ headers = {
     }
 
 
+
+
 def get_declaration():
 
     """Функция запрашивает информацию по декларации"""
@@ -48,7 +50,7 @@ def get_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': '3resrsf',
+                    'search': 'ВП RU Д-GB.РА01.А.44523/22',
                     'type': 9,
                     'translated': False,
                 },
@@ -83,6 +85,7 @@ def get_declaration():
         headers=headers,
         json=json_data,
         verify=False,
+        proxies=proxies
     )
 
     if len(response.json().get('items')) != 0:
@@ -146,6 +149,7 @@ def get_one_full_declaraion():
             response = requests.get(
                 url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
                 headers=headers,
+                proxies=proxies,
                 verify=False).json()
             scheme = response.get('idDeclScheme')
             reglaments = response.get('idTechnicalReglaments')
