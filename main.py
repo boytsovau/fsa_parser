@@ -48,7 +48,7 @@ def get_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': 'ЕАЭС N RU Д-US.РА04.А.13301/23',
+                    'search': '3resrsf',
                     'type': 9,
                     'translated': False,
                 },
@@ -88,8 +88,10 @@ def get_declaration():
     if len(response.json().get('items')) != 0:
         with open('data/data_one_dec.json', "w") as file:
             json.dump(response.json(), file, indent=4, ensure_ascii=False)
+        get_declaration_sorted()
+        get_one_full_declaraion()
     else:
-        return 'Нет информации'
+        print('Нет информации')
 
 
 def get_declaration_sorted():
@@ -130,60 +132,36 @@ def get_declaration_sorted():
         json.dump(collected_id, file, indent=4, ensure_ascii=False)
 
 
-def get_id_declaration():
-    with open('data/data_one_dec.json') as file:
-        text = json.load(file)
-    id = text.get('items')[0].get('id')
-    return id
-
-
 def get_one_full_declaraion():
     """Функция забирает более полные данные по выданой декларации.
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
 
-    id = get_id_declaration()
-
-    response = requests.get(
-        url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{id}',
-        headers=headers,
-        verify=False).json()
-
-    scheme = response.get('idDeclScheme')
-    reglaments = response.get('idTechnicalReglaments')
-
-    result = get_multi_info(id, scheme, reglaments)
-
-    return result
-
-    # with open('data_full_dec.json', "w") as file:
-    #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
-
-
-def get_result_declaration():
-    """Формируем итоговый файл с нужными данными"""
-
     with open('data/dec_find.json') as file:
         declaration = json.load(file)
-
-    with open('data/multi.json') as file:
-        multi = json.load(file)
 
     for items in declaration.values():
         for i in items:
             dec_id = i.get('id')
-            scheme_dec = multi.get('id').get(f'{dec_id}').get('scheme')
+            response = requests.get(
+                url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
+                headers=headers,
+                verify=False).json()
+            scheme = response.get('idDeclScheme')
+            reglaments = response.get('idTechnicalReglaments')
+            status = response.get('idStatus')
+            multi = get_multi_info(dec_id, scheme, reglaments, status)
+            scheme_dec = multi.get('id').get(dec_id).get('scheme')
+            dec_status = multi.get('status').get(dec_id).get('status')
             i['Схема'] = scheme_dec
+            i['Статус'] = dec_status
 
-    with open('data/result.json', "w") as file:
+    with open('data/result_dec.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
 
 
 def main():
     get_declaration()
-    get_declaration_sorted()
-    get_one_full_declaraion()
-    get_result_declaration()
 
 
 if __name__ == "__main__":

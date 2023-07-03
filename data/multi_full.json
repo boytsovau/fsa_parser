@@ -1,30 +1,28 @@
 {
-    "validationFormNormDoc": [
-        {
-            "id": 8,
-            "masterId": "8",
-            "docNum": "ТР ТС 017/2011",
-            "name": "О безопасности продукции легкой промышленности"
-        }
-    ],
     "validationScheme2": [
         {
-            "isApplicantProvider": false,
+            "isApplicantProvider": true,
             "isPresenceOfProxy": true,
-            "name": "3д",
-            "isApplicantEeuMember": true,
-            "masterId": "12",
+            "name": "Приложение № 18 ПП 353",
+            "isApplicantEeuMember": false,
+            "masterId": "3675",
             "isApplicantForeign": false,
-            "isOneOffProductTesting": false,
+            "isOneOffProductTesting": true,
             "isAccreditationLab": false,
             "isBatchProductTesting": false,
-            "validityTerm": 5,
-            "isProductSampleTesting": true,
-            "isBatchProduction": false,
-            "isSeriesProduction": true,
-            "id": 12,
+            "isProductSampleTesting": false,
+            "isBatchProduction": true,
+            "isSeriesProduction": false,
+            "id": 3674,
             "isApplicantManufacturer": true,
-            "isOneOffProduction": false
+            "isOneOffProduction": true
+        }
+    ],
+    "status": [
+        {
+            "masterId": "14",
+            "id": 14,
+            "name": "Прекращен"
         }
     ]
 }

@@ -3,12 +3,7 @@ import json
 from auth import ua, Authorization
 
 
-def get_multi_info(id, scheme, reglaments):
-    # with open('data_full_dec.json') as file:
-    #     text = json.load(file)
-        # Scheme = text.get('idDeclScheme')
-        # Reglaments = text.get('idTechnicalReglaments')
-        # id = text.get('idDeclaration')
+def get_multi_info(id, scheme, reglaments, status):
 
     headers = {
             'Accept': 'application/json, text/plain, */*',
@@ -61,6 +56,18 @@ def get_multi_info(id, scheme, reglaments):
                     ],
                 },
             ],
+            'status': [
+                {
+                    'id': [
+                        status,
+                    ],
+                    'fields': [
+                        'id',
+                        'masterId',
+                        'name',
+                    ],
+                },
+            ],
         },
     }
 
@@ -72,8 +79,9 @@ def get_multi_info(id, scheme, reglaments):
 
     data_full = {}
     decl_scheme = response.get("validationScheme2")[0].get('name')
+    decl_status = response.get("status")[0].get('name')
     data_full['id'] = {id: {'scheme': decl_scheme}}
-
+    data_full['status'] = {id: {'status': decl_status}}
     with open('data/multi_full.json', "w") as file:
         json.dump(response, file, indent=4, ensure_ascii=False)
 
