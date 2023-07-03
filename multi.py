@@ -1,7 +1,7 @@
 import requests
 import json
 from auth import ua, Authorization
-
+from proxy_data import proxies
 
 def get_multi_info(id, scheme, reglaments, status):
 
@@ -75,6 +75,7 @@ def get_multi_info(id, scheme, reglaments, status):
         'https://pub.fsa.gov.ru/nsi/api/multi',
         json=json_data,
         headers=headers,
+        proxies=proxies,
         verify=False).json()
 
     data_full = {}

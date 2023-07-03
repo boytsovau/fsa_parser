@@ -3,6 +3,7 @@ import json
 import os
 from auth import ua, Authorization
 from multi import get_multi_info
+from proxy_data import proxies
 
 headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -16,8 +17,6 @@ headers = {
         'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
         'User-Agent': f'{ua.random}',
     }
-
-
 
 
 def get_declaration():

@@ -1,6 +1,6 @@
 import requests
 from fake_useragent import UserAgent
-
+from proxy_data import proxies
 
 ua = UserAgent()
 
@@ -32,6 +32,7 @@ def get_auth(url='https://pub.fsa.gov.ru/login'):
         url,
         headers=headers,
         json=json_data,
+        proxies=proxies,
         verify=False)
     data = dict(response.headers)
     return data.get('Authorization')
