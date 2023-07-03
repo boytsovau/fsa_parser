@@ -1,9 +1,11 @@
 import requests
 import json
 import os
+from datetime import datetime
 from auth import ua, Authorization
 from multi import get_multi_info
 from proxy_data import proxies
+
 
 headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -17,6 +19,9 @@ headers = {
         'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
         'User-Agent': f'{ua.random}',
     }
+
+
+t_date = datetime.now().strftime('%H_%M_%S_%d_%m_%Y')
 
 
 def get_declaration():
@@ -159,7 +164,7 @@ def get_one_full_declaraion():
             i['Схема'] = scheme_dec
             i['Статус'] = dec_status
 
-    with open('data/result_dec.json', "w") as file:
+    with open(f'data/result_dec_{t_date}.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
 
 
