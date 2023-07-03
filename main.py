@@ -1,7 +1,6 @@
 import requests
 import json
 import os
-from datetime import datetime
 from auth import ua, Authorization
 from multi import get_multi_info
 from proxy_data import proxies
@@ -21,10 +20,7 @@ headers = {
     }
 
 
-t_date = datetime.now().strftime('%H_%M_%S_%d_%m_%Y')
-
-
-def get_declaration():
+def get_declaration(dec_num):
 
     """Функция запрашивает информацию по декларации"""
 
@@ -54,7 +50,7 @@ def get_declaration():
             'columnsSearch': [
                 {
                     'name': 'number',
-                    'search': 'ВП RU Д-GB.РА01.А.44523/22',
+                    'search': dec_num,
                     'type': 9,
                     'translated': False,
                 },
@@ -97,8 +93,9 @@ def get_declaration():
             json.dump(response.json(), file, indent=4, ensure_ascii=False)
         get_declaration_sorted()
         get_one_full_declaraion()
+        return True
     else:
-        print('Нет информации')
+        return False
 
 
 def get_declaration_sorted():
@@ -164,7 +161,7 @@ def get_one_full_declaraion():
             i['Схема'] = scheme_dec
             i['Статус'] = dec_status
 
-    with open(f'data/result_dec_{t_date}.json', "w") as file:
+    with open('data/result_dec.json', "w") as file:
         json.dump(declaration, file, indent=4, ensure_ascii=False)
 
 
