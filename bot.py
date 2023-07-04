@@ -17,14 +17,14 @@ async def start(message: types.Message):
 async def get_info(message: types.Message):
     await message.answer("Нужно подождать.....")
 
-    get_declaration(message.text)
+    result = get_declaration(message.text)
 
-    if get_declaration(message.text):
+    if result:
 
-        with open("data/result_dec.json") as file:
-            data = json.load(file)
+        # with open("data/result_dec.json") as file:
+        #     data = json.load(file)
 
-        for item in data.values():
+        for item in result.values():
             for i in item:
                 info = f"{hbold('Номер: ')} {i.get('number')}\n" \
                     f"{hbold('Дата регистрации: ')} {i.get('Register Date')}\n" \

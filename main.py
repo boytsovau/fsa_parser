@@ -92,8 +92,8 @@ def get_declaration(dec_num):
         with open('data/data_one_dec.json', "w") as file:
             json.dump(response.json(), file, indent=4, ensure_ascii=False)
         get_declaration_sorted()
-        get_one_full_declaraion()
-        return True
+        result = get_one_full_declaraion()
+        return result
     else:
         return False
 
@@ -161,8 +161,10 @@ def get_one_full_declaraion():
             i['Схема'] = scheme_dec
             i['Статус'] = dec_status
 
-    with open('data/result_dec.json', "w") as file:
-        json.dump(declaration, file, indent=4, ensure_ascii=False)
+
+    # with open('data/result_dec.json', "w") as file:
+    #     json.dump(declaration, file, indent=4, ensure_ascii=False)
+    return declaration
 
 
 def main():
