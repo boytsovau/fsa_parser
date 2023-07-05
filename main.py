@@ -1,5 +1,5 @@
 import requests
-# import json
+import json
 import os
 from auth import ua, Authorization
 from multi import get_multi_info
@@ -87,11 +87,13 @@ def get_declaration(dec_num):
         verify=False,
         proxies=proxies
     )
+    resp = json.loads(response.text)
 
-    if len(response.json().get('items')) != 0:
+    if len(resp.get('items')) != 0:
         # with open('data/data_one_dec.json', "w") as file:
         #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
-        data = get_declaration_sorted(response)
+
+        data = get_declaration_sorted(resp)
         result = get_one_full_declaraion(data)
         return result
     else:
