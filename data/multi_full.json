@@ -1,48 +1,28 @@
 {
-    "validationFormNormDoc": [
-        {
-            "id": 23,
-            "masterId": "23",
-            "docNum": "ТР ТС 029/2012",
-            "name": "Требования безопасности пищевых добавок, ароматизаторов и технологических вспомогательных средств"
-        },
-        {
-            "id": 27,
-            "masterId": "27",
-            "docNum": "ТР ТС 021/2011",
-            "name": "О безопасности пищевой продукции"
-        },
-        {
-            "id": 97161,
-            "masterId": "97161",
-            "docNum": "ТР ТС 022/2011",
-            "name": "Пищевая продукция в части ее маркировки"
-        }
-    ],
     "validationScheme2": [
         {
             "isApplicantProvider": true,
             "isPresenceOfProxy": true,
-            "name": "3д",
-            "isApplicantEeuMember": true,
-            "masterId": "128",
-            "isApplicantForeign": true,
-            "isOneOffProductTesting": false,
-            "isAccreditationLab": true,
+            "name": "Приложение № 18 ПП 353",
+            "isApplicantEeuMember": false,
+            "masterId": "3675",
+            "isApplicantForeign": false,
+            "isOneOffProductTesting": true,
+            "isAccreditationLab": false,
             "isBatchProductTesting": false,
-            "isProductSampleTesting": true,
-            "isBatchProduction": false,
-            "isSeriesProduction": true,
-            "id": 128,
+            "isProductSampleTesting": false,
+            "isBatchProduction": true,
+            "isSeriesProduction": false,
+            "id": 3674,
             "isApplicantManufacturer": true,
-            "isOneOffProduction": false
+            "isOneOffProduction": true
         }
     ],
     "status": [
         {
-            "masterId": "6",
-            "id": 6,
-            "name": "Действует"
+            "masterId": "1",
+            "id": 1,
+            "name": "Архивный"
         }
     ]
 }

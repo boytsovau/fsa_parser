@@ -1,5 +1,5 @@
 import requests
-import json
+# import json
 import os
 from auth import ua, Authorization
 from multi import get_multi_info
@@ -89,26 +89,26 @@ def get_declaration(dec_num):
     )
 
     if len(response.json().get('items')) != 0:
-        with open('data/data_one_dec.json', "w") as file:
-            json.dump(response.json(), file, indent=4, ensure_ascii=False)
-        get_declaration_sorted()
-        result = get_one_full_declaraion()
+        # with open('data/data_one_dec.json', "w") as file:
+        #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
+        data = get_declaration_sorted(response)
+        result = get_one_full_declaraion(data)
         return result
     else:
         return False
 
 
-def get_declaration_sorted():
+def get_declaration_sorted(data):
     """Функция вытягивает только нужные для нас поля
     из общих данных по декларации"""
 
     collected_id = {}
     declaration = []
-    with open('data/data_one_dec.json') as file:
-        text = json.load(file)
+    # with open('data/data_one_dec.json') as file:
+    #     text = json.load(file)
 
     index = 0
-    id = text.get('items')
+    id = data.get('items')
 
     for item in id:
         declaration_id = item.get('id')
@@ -132,19 +132,20 @@ def get_declaration_sorted():
         collected_id['declaration'] = declaration
         index += 1
 
-    with open('data/dec_find.json', "w") as file:
-        json.dump(collected_id, file, indent=4, ensure_ascii=False)
+    # with open('data/dec_find.json', "w") as file:
+    #     json.dump(collected_id, file, indent=4, ensure_ascii=False)
+        return collected_id
 
 
-def get_one_full_declaraion():
+def get_one_full_declaraion(data):
     """Функция забирает более полные данные по выданой декларации.
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
 
-    with open('data/dec_find.json') as file:
-        declaration = json.load(file)
+    # with open('data/dec_find.json') as file:
+    #     declaration = json.load(file)
 
-    for items in declaration.values():
+    for items in data.values():
         for i in items:
             dec_id = i.get('id')
             response = requests.get(
@@ -161,10 +162,9 @@ def get_one_full_declaraion():
             i['Схема'] = scheme_dec
             i['Статус'] = dec_status
 
-
     # with open('data/result_dec.json', "w") as file:
     #     json.dump(declaration, file, indent=4, ensure_ascii=False)
-    return declaration
+    return data
 
 
 def main():
