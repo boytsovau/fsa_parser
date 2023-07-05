@@ -1,28 +1,37 @@
 {
+    "validationFormNormDoc": [
+        {
+            "id": 32,
+            "masterId": "32",
+            "docNum": "ТР ТС 015/2011",
+            "name": "О безопасности зерна"
+        }
+    ],
     "validationScheme2": [
         {
             "isApplicantProvider": true,
             "isPresenceOfProxy": true,
-            "name": "Приложение № 18 ПП 353",
-            "isApplicantEeuMember": false,
-            "masterId": "3675",
+            "name": "2д",
+            "isApplicantEeuMember": true,
+            "masterId": "11",
             "isApplicantForeign": false,
             "isOneOffProductTesting": true,
             "isAccreditationLab": false,
-            "isBatchProductTesting": false,
+            "isBatchProductTesting": true,
+            "validityTerm": 0,
             "isProductSampleTesting": false,
             "isBatchProduction": true,
             "isSeriesProduction": false,
-            "id": 3674,
+            "id": 11,
             "isApplicantManufacturer": true,
             "isOneOffProduction": true
         }
     ],
     "status": [
         {
-            "masterId": "1",
-            "id": 1,
-            "name": "Архивный"
+            "masterId": "6",
+            "id": 6,
+            "name": "Действует"
         }
     ]
 }

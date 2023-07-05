@@ -136,7 +136,7 @@ def get_declaration_sorted(data):
 
     # with open('data/dec_find.json', "w") as file:
     #     json.dump(collected_id, file, indent=4, ensure_ascii=False)
-        return collected_id
+    return collected_id
 
 
 def get_one_full_declaraion(data):
