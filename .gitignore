@@ -9,7 +9,7 @@ __pycache__/
 # User
 
 proxy_data.py
-
+*.service
 
 # Distribution / packaging
 .Python
