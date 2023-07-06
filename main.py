@@ -90,9 +90,9 @@ def get_declaration(dec_num):
 
     if response.status_code != 200:
         print(response.status_code)
-        return 'Сервис не доступен, попробуйте позже'
+        return None
     else:
-        print (response.status_code)
+        print(response.status_code)
         if len(resp.get('items')) != 0:
             # with open('data/data_one_dec.json', "w") as file:
             #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
