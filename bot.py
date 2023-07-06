@@ -35,6 +35,8 @@ async def get_info(message: types.Message):
                     f"{hbold('Статус: ')} {i.get('Статус')}\n" \
                     f"{hbold('============================')}\n"
                 await message.answer(info)
+    if result is None:
+        await message.answer("Сервис не доступен, попробуйте позже")
     else:
         await message.answer("Нет информации")
 
