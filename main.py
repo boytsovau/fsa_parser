@@ -81,7 +81,6 @@ def get_declaration(dec_num):
 
     response = s.post(
         'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
-        # cookies=cookies,
         headers=headers,
         json=json_data,
         verify=False,
@@ -89,15 +88,20 @@ def get_declaration(dec_num):
     )
     resp = json.loads(response.text)
 
-    if len(resp.get('items')) != 0:
-        # with open('data/data_one_dec.json', "w") as file:
-        #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
-
-        data = get_declaration_sorted(resp)
-        result = get_one_full_declaraion(data)
-        return result
+    if response.status_code != 200:
+        print(response.status_code)
+        return 'Сервис не доступен, попробуйте позже'
     else:
-        return False
+        print (response.status_code)
+        if len(resp.get('items')) != 0:
+            # with open('data/data_one_dec.json', "w") as file:
+            #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
+
+            data = get_declaration_sorted(resp)
+            result = get_one_full_declaraion(data)
+            return result
+        else:
+            return False
 
 
 def get_declaration_sorted(data):
