@@ -37,7 +37,7 @@ async def get_info(message: types.Message):
                 await message.answer(info)
     if result is None:
         await message.answer("Сервис не доступен, попробуйте позже")
-    else:
+    if not result:
         await message.answer("Нет информации")
 
 
