@@ -86,7 +86,12 @@ def get_declaration(dec_num):
         verify=False,
         proxies=proxies
     )
+
+    print(response)
+
     resp = json.loads(response.text)
+
+    print(resp)
 
     if response.status_code != 200:
         print(response.status_code)

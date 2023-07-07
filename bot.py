@@ -1,10 +1,10 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
-from proxy_data import TOKEN, proxies
+from proxy_data import TOKEN
 from main import get_declaration
 # import json
 
-bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML, proxy=proxies['https'])
+bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
 
 
