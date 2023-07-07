@@ -87,17 +87,17 @@ def get_declaration(dec_num):
         proxies=proxies
     )
 
-    print(response)
+    print(f'Первый запрос{response}')
 
     resp = json.loads(response.text)
 
-    print(resp)
+    print(f'Обработка в JSON {resp}')
 
     if response.status_code != 200:
         print(response.status_code)
         return None
     else:
-        print(response.status_code)
+        print(f'Сработал else и скриипр продолжил работу {response.status_code}')
         if len(resp.get('items')) != 0:
             # with open('data/data_one_dec.json', "w") as file:
             #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
