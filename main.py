@@ -78,26 +78,25 @@ def get_declaration(dec_num):
     }
 
     s = requests.session()
-
-    response = s.post(
-        'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
-        headers=headers,
-        json=json_data,
-        verify=False,
-        proxies=proxies
-    )
+    try:
+        response = s.post(
+            'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
+            headers=headers,
+            json=json_data,
+            verify=False,
+            proxies=proxies
+        )
+    except Exception:
+        return None
 
     print(f'Первый запрос{response}')
 
-    resp = json.loads(response.text)
-
-    print(f'Обработка в JSON {resp}')
-
     if response.status_code != 200:
-        print(response.status_code)
         return None
     else:
-        print(f'Сработал else и скриипр продолжил работу {response.status_code}')
+        resp = json.loads(response.text)
+        print(f'Обработка в JSON {resp}')
+        print(f'Сработал else и скрипт продолжил работу {response.status_code}')
         if len(resp.get('items')) != 0:
             # with open('data/data_one_dec.json', "w") as file:
             #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
@@ -106,7 +105,7 @@ def get_declaration(dec_num):
             result = get_one_full_declaraion(data)
             return result
         else:
-            return False
+            return 'Нет иформации'
 
 
 def get_declaration_sorted(data):
