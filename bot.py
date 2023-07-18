@@ -37,7 +37,8 @@ async def get_info(message: types.Message):
                     f"{hbold('============================')}\n"
                 await message.answer(info)
     if result is None:
-        await message.answer("Сервис не доступен, попробуйте позже")
+        await message.answer("Сайт Федеральной службы по аккредетаци не \
+                             доступен, попробуйте позже")
     if result == 'Нет иформации':
         await message.answer("Нет информации")
 
