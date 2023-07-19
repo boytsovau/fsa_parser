@@ -81,6 +81,8 @@ def get_declaration(dec_num):
         ],
     }
 
+    logging.debug(json_data)
+
     s = requests.session()
     try:
         response = s.post(
