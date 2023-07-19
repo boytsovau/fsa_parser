@@ -19,28 +19,31 @@ async def get_info(message: types.Message):
 
     result = get_declaration(message.text)
 
-    if result:
+    try:
+        if result:
 
-        # with open("data/result_dec.json") as file:
-        #     data = json.load(file)
+            # with open("data/result_dec.json") as file:
+            #     data = json.load(file)
 
-        for item in result.values():
-            for i in item:
-                info = f"{hbold('Номер: ')} {i.get('number')}\n" \
-                    f"{hbold('Дата регистрации: ')} {i.get('Register Date')}\n" \
-                    f"{hbold('Заявитель: ')} {i.get('Applicant')}\n" \
-                    f"{hbold('Производитель: ')} {i.get('Manufacturer')}\n" \
-                    f"{hbold('Продукция: ')} {i.get('Production')}\n" \
-                    f"{hbold('Схема: ')} {i.get('Схема')}\n" \
-                    f"{hbold('Статус: ')} {i.get('Статус')}\n" \
-                    f"{hbold('Ссылка: ')} https://pub.fsa.gov.ru/rds/declaration/view/{i.get('id')}/common\n" \
-                    f"{hbold('============================')}\n"
-                await message.answer(info)
-    if result is None:
-        await message.answer("Сайт Федеральной службы по аккредетации не \
-                             доступен, попробуйте позже")
-    if result is False:
-        await message.answer("Нет информации")
+            for item in result.values():
+                for i in item:
+                    info = f"{hbold('Номер: ')} {i.get('number')}\n" \
+                        f"{hbold('Дата регистрации: ')} {i.get('Register Date')}\n" \
+                        f"{hbold('Заявитель: ')} {i.get('Applicant')}\n" \
+                        f"{hbold('Производитель: ')} {i.get('Manufacturer')}\n" \
+                        f"{hbold('Продукция: ')} {i.get('Production')}\n" \
+                        f"{hbold('Схема: ')} {i.get('Схема')}\n" \
+                        f"{hbold('Статус: ')} {i.get('Статус')}\n" \
+                        f"{hbold('Ссылка: ')} https://pub.fsa.gov.ru/rds/declaration/view/{i.get('id')}/common\n" \
+                        f"{hbold('============================')}\n"
+                    await message.answer(info)
+        if result is None:
+            await message.answer("Сайт Федеральной службы по аккредетации не \
+                                доступен, попробуйте позже")
+        if result is False:
+            await message.answer("Нет информации")
+    except Exception:
+        await message.answer("Попробуйте позже")
 
 
 def main():
