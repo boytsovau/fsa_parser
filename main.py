@@ -80,7 +80,7 @@ def get_declaration(dec_num):
     s = requests.session()
     try:
         response = s.post(
-            'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
+            'https://pub1.fsa.gov.ru/api/v1/rds/common/declarations/get',
             headers=headers,
             json=json_data,
             verify=False,
@@ -105,7 +105,7 @@ def get_declaration(dec_num):
             result = get_one_full_declaraion(data)
             return result
         else:
-            return 'Нет иформации'
+            return False
 
 
 def get_declaration_sorted(data):
