@@ -1,9 +1,13 @@
 import requests
 import json
 import os
+import logging
 from auth import ua, Authorization
 from multi import get_multi_info
 from proxy_data import proxies
+
+
+logging.basicConfig(level=logging.DEBUG, filename="bot.log")
 
 
 headers = {
@@ -86,7 +90,9 @@ def get_declaration(dec_num):
             verify=False,
             proxies=proxies
         )
-    except Exception:
+        logging.debug(response)
+    except Exception as ex:
+        logging.debug(ex)
         return None
 
     print(f'Первый запрос{response}')
@@ -96,13 +102,16 @@ def get_declaration(dec_num):
     else:
         resp = json.loads(response.text)
         print(f'Обработка в JSON {resp}')
+        logging.info(f'Обработка в JSON {resp}')
         print(f'Сработал else и скрипт продолжил работу {response.status_code}')
+        logging.info(f'Сработал else и скрипт продолжил работу {response.status_code}')
         if len(resp.get('items')) != 0:
             # with open('data/data_one_dec.json', "w") as file:
             #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
 
             data = get_declaration_sorted(resp)
             result = get_one_full_declaraion(data)
+            logging.info(result)
             return result
         else:
             return False

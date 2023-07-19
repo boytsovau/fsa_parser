@@ -2,7 +2,10 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
 from proxy_data import TOKEN
 from main import get_declaration
+import logging
 # import json
+
+logging.basicConfig(level=logging.DEBUG, filename="bot.log")
 
 bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
