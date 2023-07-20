@@ -1,15 +1,20 @@
 import requests
 import json
 import logging
-from auth import ua, Authorization
+from auth import get_auth
 from multi import get_multi_info
+from fake_useragent import UserAgent
 from proxy_data import proxies
 
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG, filename="bot.log")
 
+ua = UserAgent()
+
 
 def get_declaration(dec_num):
+
+    Authorization = get_auth()
 
     headers = {
         'Accept': 'application/json, text/plain, */*',
@@ -146,6 +151,8 @@ def get_one_full_declaraion(data):
     """Функция забирает более полные данные по выданой декларации.
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
+
+    Authorization = get_auth()
 
     headers = {
         'Accept': 'application/json, text/plain, */*',

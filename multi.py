@@ -1,9 +1,14 @@
 import requests
-from auth import ua, Authorization
+from auth import get_auth
+from fake_useragent import UserAgent
 from proxy_data import proxies
+
+ua = UserAgent()
 
 
 def get_multi_info(id, scheme, reglaments, status):
+
+    Authorization = get_auth()
 
     headers = {
             'Accept': 'application/json, text/plain, */*',

@@ -36,6 +36,3 @@ def get_auth(url='https://pub.fsa.gov.ru/login'):
         verify=False)
     data = dict(response.headers)
     return data.get('Authorization')
-
-
-Authorization = get_auth()
