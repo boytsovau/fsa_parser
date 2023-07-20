@@ -10,6 +10,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:
 bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
 
+users = set()
 
 @dp.message_handler(commands="start")
 async def start(message: types.Message):
@@ -20,8 +21,10 @@ async def start(message: types.Message):
 async def get_info(message: types.Message):
     await message.answer("Нужно подождать.....")
     user_status = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
-    with open("users.log", "w") as file:
-        file.writelines(str(user_status))
+    if user_status.user.username not in users:
+        users.add(user_status.user.username)
+        with open("users.log", "a") as file:
+            file.write(str(user_status) + '\n')
 
     result = get_declaration(message.text)
 
