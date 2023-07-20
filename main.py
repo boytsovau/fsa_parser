@@ -6,7 +6,7 @@ from multi import get_multi_info
 from proxy_data import proxies
 
 
-logging.basicConfig(level=logging.DEBUG, filename="bot.log")
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG, filename="bot.log")
 
 
 def get_declaration(dec_num):
