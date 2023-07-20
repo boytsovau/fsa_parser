@@ -21,7 +21,7 @@ async def get_info(message: types.Message):
     await message.answer("Нужно подождать.....")
     user_status = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     with open("users.log", "w") as file:
-        file.writelines(user_status.user.username)
+        file.writelines(str(user_status))
 
     result = get_declaration(message.text)
 
