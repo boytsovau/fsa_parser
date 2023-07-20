@@ -164,8 +164,7 @@ def get_one_full_declaraion(data):
         for i in items:
             dec_id = i.get('id')
             response = requests.get(
-                url=f'https://pub.fsa.gov.ru/api/v1/ \
-                      rds/common/declarations/{dec_id}',
+                url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
                 headers=headers,
                 proxies=proxies,
                 verify=False).json()
