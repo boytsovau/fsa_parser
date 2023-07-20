@@ -1,6 +1,5 @@
 import requests
 import json
-import os
 import logging
 from auth import ua, Authorization
 from multi import get_multi_info
@@ -10,7 +9,9 @@ from proxy_data import proxies
 logging.basicConfig(level=logging.DEBUG, filename="bot.log")
 
 
-headers = {
+def get_declaration(dec_num):
+
+    headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
         'Authorization': f'{Authorization}',
@@ -23,13 +24,7 @@ headers = {
         'User-Agent': f'{ua.random}',
     }
 
-
-def get_declaration(dec_num):
-
     """Функция запрашивает информацию по декларации"""
-
-    if not os.path.exists('data'):
-        os.mkdir('data')
 
     json_data = {
         'size': 10,
@@ -97,20 +92,15 @@ def get_declaration(dec_num):
         logging.debug(ex)
         return None
 
-    print(f'Первый запрос{response}')
+    logging.info(f'Первый запрос{response}')
 
     if response.status_code != 200:
         return None
     else:
         resp = json.loads(response.text)
-        print(f'Обработка в JSON {resp}')
         logging.info(f'Обработка в JSON {resp}')
-        print(f'Сработал else и скрипт продолжил работу {response.status_code}')
         logging.info(f'Сработал else и скрипт продолжил работу {response.status_code}')
         if len(resp.get('items')) != 0:
-            # with open('data/data_one_dec.json', "w") as file:
-            #     json.dump(response.json(), file, indent=4, ensure_ascii=False)
-
             data = get_declaration_sorted(resp)
             result = get_one_full_declaraion(data)
             logging.info(result)
@@ -125,9 +115,6 @@ def get_declaration_sorted(data):
 
     collected_id = {}
     declaration = []
-    # with open('data/data_one_dec.json') as file:
-    #     text = json.load(file)
-
     index = 0
     id = data.get('items')
 
@@ -152,9 +139,6 @@ def get_declaration_sorted(data):
         )
         collected_id['declaration'] = declaration
         index += 1
-
-    # with open('data/dec_find.json', "w") as file:
-    #     json.dump(collected_id, file, indent=4, ensure_ascii=False)
     return collected_id
 
 
@@ -163,14 +147,25 @@ def get_one_full_declaraion(data):
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
 
-    # with open('data/dec_find.json') as file:
-    #     declaration = json.load(file)
+    headers = {
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Authorization': f'{Authorization}',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'Origin': 'https://pub.fsa.gov.ru',
+        'Pragma': 'no-cache',
+        'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
+        'User-Agent': f'{ua.random}',
+    }
 
     for items in data.values():
         for i in items:
             dec_id = i.get('id')
             response = requests.get(
-                url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
+                url=f'https://pub.fsa.gov.ru/api/v1/ \
+                      rds/common/declarations/{dec_id}',
                 headers=headers,
                 proxies=proxies,
                 verify=False).json()
@@ -182,9 +177,6 @@ def get_one_full_declaraion(data):
             dec_status = multi.get('status').get(dec_id).get('status')
             i['Схема'] = scheme_dec
             i['Статус'] = dec_status
-
-    # with open('data/result_dec.json', "w") as file:
-    #     json.dump(declaration, file, indent=4, ensure_ascii=False)
     return data
 
 

@@ -1,5 +1,4 @@
 import requests
-# import json
 from auth import ua, Authorization
 from proxy_data import proxies
 
@@ -84,11 +83,6 @@ def get_multi_info(id, scheme, reglaments, status):
     decl_status = response.get("status")[0].get('name')
     data_full['id'] = {id: {'scheme': decl_scheme}}
     data_full['status'] = {id: {'status': decl_status}}
-    # with open('data/multi_full.json', "w") as file:
-    #     json.dump(response, file, indent=4, ensure_ascii=False)
-
-    # with open('data/multi.json', "w") as file:
-    #     json.dump(data_full, file, indent=4, ensure_ascii=False)
     return data_full
 
 

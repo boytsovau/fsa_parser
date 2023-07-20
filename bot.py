@@ -1,9 +1,9 @@
+import logging
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
 from proxy_data import TOKEN
 from main import get_declaration
-import logging
-# import json
+
 
 logging.basicConfig(level=logging.DEBUG, filename="bot.log")
 
@@ -24,10 +24,6 @@ async def get_info(message: types.Message):
 
     try:
         if result:
-
-            # with open("data/result_dec.json") as file:
-            #     data = json.load(file)
-
             for item in result.values():
                 for i in item:
                     info = f"{hbold('Номер: ')} {i.get('number')}\n" \

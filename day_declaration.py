@@ -80,7 +80,6 @@ def get_day_declaration():
 
     response = s.post(
         'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
-        # cookies=cookies,
         headers=headers,
         json=json_data,
         verify=False,
@@ -91,6 +90,7 @@ def get_day_declaration():
 
 
 def get_declaration_sorted():
+
     """Данная функиця собирает только нужную информацию по декларациям,
     которые выпущены за день"""
 
