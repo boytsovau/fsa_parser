@@ -35,6 +35,7 @@ async def get_info(message: types.Message):
                 for i in item:
                     info = f"{hbold('Номер: ')} {i.get('number')}\n" \
                         f"{hbold('Дата регистрации: ')} {i.get('Register Date')}\n" \
+                        f"{hbold('Дата окончания: ')} {i.get('Issue Date')}\n" \
                         f"{hbold('Заявитель: ')} {i.get('Applicant')}\n" \
                         f"{hbold('Производитель: ')} {i.get('Manufacturer')}\n" \
                         f"{hbold('Продукция: ')} {i.get('Production')}\n" \
