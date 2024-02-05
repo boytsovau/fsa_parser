@@ -1,7 +1,7 @@
 import requests
 import json
 import logging
-from auth import get_auth
+from auth import get_token, token
 from multi import get_multi_info
 from fake_useragent import UserAgent
 from proxy_data import proxies
@@ -14,12 +14,12 @@ ua = UserAgent()
 
 def get_declaration(dec_num):
 
-    Authorization = get_auth()
+    get_token()
 
     headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Authorization': f'{Authorization}',
+        'Authorization': token.get('token'),
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
         'Content-Type': 'application/json',
@@ -152,12 +152,10 @@ def get_one_full_declaraion(data):
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
 
-    Authorization = get_auth()
-
     headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Authorization': f'{Authorization}',
+        'Authorization': token.get('token'),
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
         'Content-Type': 'application/json',

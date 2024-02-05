@@ -1,5 +1,5 @@
 import requests
-from auth import get_auth
+from auth import token
 from fake_useragent import UserAgent
 from proxy_data import proxies
 
@@ -8,12 +8,10 @@ ua = UserAgent()
 
 def get_multi_info(id, scheme, reglaments, status):
 
-    Authorization = get_auth()
-
     headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Authorization': f'{Authorization}',
+            'Authorization': token.get('token'),
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
             'Content-Type': 'application/json',
