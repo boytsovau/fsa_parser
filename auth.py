@@ -32,7 +32,7 @@ def get_auth(url='https://pub.fsa.gov.ru/login'):
         url,
         headers=headers,
         json=json_data,
-        proxies=proxies,
+        # proxies=proxies,
         verify=False)
     data = dict(response.headers)
     return data.get('Authorization')
