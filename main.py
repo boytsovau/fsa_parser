@@ -90,7 +90,7 @@ def get_declaration(dec_num):
             headers=headers,
             json=json_data,
             verify=False,
-            # proxies=proxies
+            proxies=proxies
         )
         logging.debug(response)
     except Exception as ex:
@@ -171,7 +171,7 @@ def get_one_full_declaraion(data):
             response = requests.get(
                 url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
                 headers=headers,
-                # proxies=proxies,
+                proxies=proxies,
                 verify=False).json()
             scheme = response.get('idDeclScheme')
             reglaments = response.get('idTechnicalReglaments')

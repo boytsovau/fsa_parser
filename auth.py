@@ -32,6 +32,7 @@ def get_auth(url='https://pub.fsa.gov.ru/login'):
         url,
         headers=headers,
         json=json_data,
+        proxies=proxies,
         verify=False)
     data = dict(response.headers)
     token['token'] = data.get('Authorization')
@@ -52,6 +53,7 @@ def validation_token(token):
     response = requests.get(
             'https://pub.fsa.gov.ru/token/is/actual/',
             headers=headers,
+            proxies=proxies,
             verify=False)
     valid = response.text
     return valid
