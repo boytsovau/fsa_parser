@@ -13,7 +13,6 @@ from main import get_declaration
 
 load_dotenv()
 
-
 TOKEN = os.getenv('BOT_TOKEN')
 >>>>>>> 4fa3687 (	modified:   auth.py)
 
