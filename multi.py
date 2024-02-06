@@ -1,6 +1,6 @@
 import requests
+import os
 import logging
-from auth import FsaAuth
 from fake_useragent import UserAgent
 from proxy_data import proxies
 
@@ -12,12 +12,11 @@ logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:
 
 def get_multi_info(id, scheme, reglaments, status):
 
-    fsa_auth = FsaAuth()
-    logging.debug(f"get_multi__ {fsa_auth.token.get('token')}")
+    logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
     headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Authorization': fsa_auth.token.get('token'),
+            'Authorization': os.getenv('FSA_TOKEN'),
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
             'Content-Type': 'application/json',
