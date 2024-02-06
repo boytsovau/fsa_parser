@@ -20,7 +20,7 @@ def get_declaration(dec_num):
     headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Authorization': fsa_auth.token.get('token'),
+        'Authorization': os.getenv('FSA_TOKEN'),
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ def get_declaration(dec_num):
     }
 
     logging.debug(json_data)
-    logging.debug(f"get_dec____ {fsa_auth.token.get('token')}")
+    logging.debug(f"get_dec____ {os.getenv('FSA_TOKEN')}")
     s = requests.session()
     try:
         response = s.post(
@@ -155,12 +155,11 @@ def get_one_full_declaraion(data):
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
 
-    fsa_auth = FsaAuth()
-    logging.debug(f"get_dec__full__ {fsa_auth.token.get('token')}")
+    logging.debug(f"get_dec__full__ {os.getenv('FSA_TOKEN')}")
     headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Authorization': fsa_auth.token.get('token'),
+        'Authorization': os.getenv('FSA_TOKEN'),
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
         'Content-Type': 'application/json',

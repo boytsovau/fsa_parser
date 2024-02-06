@@ -4,9 +4,17 @@ import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
+<<<<<<< HEAD
 from main import Declaration
 
 load_dotenv()
+=======
+from main import get_declaration
+
+load_dotenv()
+
+TOKEN = os.getenv('BOT_TOKEN')
+>>>>>>> 4fa3687 (	modified:   auth.py)
 
 TOKEN = os.getenv('BOT_TOKEN')
 

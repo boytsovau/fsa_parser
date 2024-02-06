@@ -2,10 +2,7 @@ import requests
 import os
 from fake_useragent import UserAgent
 from proxy_data import proxies
-from dotenv import load_dotenv
 
-
-load_dotenv()
 
 class FsaAuth:
     def __init__(self):
@@ -13,7 +10,7 @@ class FsaAuth:
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Authorization': 'Bearer null',
+            'Authorization': os.getenv('FSA_TOKEN'),
             'Connection': 'keep-alive',
             'Content-Type': 'application/json',
             'Origin': 'https://pub.fsa.gov.ru',
@@ -23,7 +20,7 @@ class FsaAuth:
             'Sec-Fetch-Site': 'same-origin',
             'User-Agent': f'{self.ua.random}',
         }
-        self.token = {'token': 'Bearer null'}
+        self.token = {'token': os.getenv('FSA_TOKEN')}
         self.json_data = {
             'username': 'anonymous',
             'password': 'hrgesf7HDR67Bd',
@@ -33,6 +30,7 @@ class FsaAuth:
         response = requests.post(url, headers=self.headers, json=self.json_data, verify=False)
         data = dict(response.headers)
         self.token['token'] = data.get('Authorization')
+        os.environ['FSA_TOKEN'] = self.token['token']
 
     def validation_token(self):
         headers = {
