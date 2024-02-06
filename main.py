@@ -3,64 +3,100 @@ import json
 import os
 import logging
 from auth import FsaAuth
+from multi import get_multi_info
 from fake_useragent import UserAgent
 
 
-logging.basicConfig(format='%(asctime)s - %(message)s',
-                    datefmt='%d-%b-%y %H:%M:%S',
-                    level=logging.DEBUG,
-                    filename="bot.log")
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG, filename="bot.log")
+
+ua = UserAgent()
 
 
-class Declaration():
+def get_declaration(dec_num):
 
-    def __init__(self, dec_num: str) -> None:
-        self.ua = UserAgent()
-        self.auth = FsaAuth()
-        self.auth.get_token()
-        self.dec_num = dec_num
-        self.headers = {
-            'Accept': 'application/json, text/plain, */*',
-            'Authorization': os.getenv('FSA_TOKEN'),
-            'Content-Type': 'application/json',
-            'Origin': 'https://pub.fsa.gov.ru',
-            'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
-            'User-Agent': f'{self.ua.random}',
-        }
-        self.json_data = {
-            'size': 10,
-            'page': 0,
-            'filter': {
-                'columnsSearch': [
-                    {
-                        'name': 'number',
-                        'search': self.dec_num,
-                        'type': 9,
-                        'translated': False,
-                    },
-                ],
-            }
-        }
+    fsa_auth = FsaAuth()
+    fsa_auth.get_token()
 
-    def get_declaration(self) -> dict:
+    headers = {
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Authorization': fsa_auth.token.get('token'),
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'Origin': 'https://pub.fsa.gov.ru',
+        'Pragma': 'no-cache',
+        'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
+        'User-Agent': f'{ua.random}',
+    }
 
-        """Функция запрашивает информацию по декларации"""
+    """Функция запрашивает информацию по декларации"""
 
-        logging.debug(self.json_data)
-        logging.debug(f"get_dec____ {os.getenv('FSA_TOKEN')}")
-        s = requests.session()
-        try:
-            response = s.post(
-                'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
-                headers=self.headers,
-                json=self.json_data,
-                verify=False,
-                # proxies=os.getnenv("PROXY")
-            )
-            logging.debug(response)
-        except Exception as ex:
-            logging.debug(ex)
-            return None
+    json_data = {
+        'size': 10,
+        'page': 0,
+        'filter': {
+            'status': [],
+            'idDeclType': [],
+            'idCertObjectType': [],
+            'idProductType': [],
+            'idGroupRU': [],
+            'idGroupEEU': [],
+            'idTechReg': [],
+            'idApplicantType': [],
+            'regDate': {
+                'minDate': None,
+                'maxDate': None,
+            },
+            'endDate': {
+                'minDate': None,
+                'maxDate': None,
+            },
+            'columnsSearch': [
+                {
+                    'name': 'number',
+                    'search': dec_num,
+                    'type': 9,
+                    'translated': False,
+                },
+            ],
+            'idProductOrigin': [],
+            'idProductEEU': [],
+            'idProductRU': [],
+            'idDeclScheme': [],
+            'awaitForApprove': None,
+            'awaitOperatorCheck': None,
+            'editApp': None,
+            'violationSendDate': None,
+            'isProtocolInvalid': None,
+            'resultChecker': None,
+            'statusChecker': None,
+            'protocolsChecker': None,
+            'mistakeFound': None,
+        },
+        'columnsSort': [
+            {
+                'column': 'declDate',
+                'sort': 'DESC',
+            },
+        ],
+    }
+
+    logging.debug(json_data)
+    logging.debug(f"get_dec____ {fsa_auth.token.get('token')}")
+    s = requests.session()
+    try:
+        response = s.post(
+            'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
+            headers=headers,
+            json=json_data,
+            verify=False,
+            # proxies=proxies
+        )
+        logging.debug(response)
+    except Exception as ex:
+        logging.debug(ex)
+        return None
 
         logging.info(f'Первый запрос{response}')
 
@@ -114,9 +150,25 @@ class Declaration():
 
     def get_one_full_declaraion(self, data: dict) -> dict:
 
-        """Функция забирает более полные данные по выданой декларации.
-        Далее в теле используем функцию get_multi_info() в которой
-        формируется файл с информацией о схеме декларирования"""
+def get_one_full_declaraion(data):
+    """Функция забирает более полные данные по выданой декларации.
+    Далее в теле используем функцию get_multi_info() в которой
+    формируется файл с информацией о схеме декларирования"""
+
+    fsa_auth = FsaAuth()
+    logging.debug(f"get_dec__full__ {fsa_auth.token.get('token')}")
+    headers = {
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Authorization': fsa_auth.token.get('token'),
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'Origin': 'https://pub.fsa.gov.ru',
+        'Pragma': 'no-cache',
+        'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
+        'User-Agent': f'{ua.random}',
+    }
 
         for items in data.values():
             for i in items:
