@@ -1,17 +1,23 @@
 import requests
-from auth import token
+import logging
+from auth import FsaAuth
 from fake_useragent import UserAgent
 from proxy_data import proxies
 
+
 ua = UserAgent()
+
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG, filename="bot.log")
 
 
 def get_multi_info(id, scheme, reglaments, status):
 
+    fsa_auth = FsaAuth()
+    logging.debug(f"get_multi__ {fsa_auth.token.get('token')}")
     headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Authorization': token.get('token'),
+            'Authorization': fsa_auth.token.get('token'),
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
             'Content-Type': 'application/json',
