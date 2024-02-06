@@ -1,10 +1,14 @@
 import logging
 import datetime
+import os
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
-from proxy_data import TOKEN
 from main import get_declaration
 
+load_dotenv()
+
+TOKEN = os.getenv('BOT_TOKEN')
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG, filename="bot.log")
 
