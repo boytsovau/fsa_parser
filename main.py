@@ -142,6 +142,7 @@ class Declaration():
                 return False
 
     def get_declaration_sorted(self, data: dict) -> dict:
+
         """Функция вытягивает только нужные для нас поля
         из общих данных по декларации"""
 
@@ -174,6 +175,7 @@ class Declaration():
         return collected_id
 
     def get_one_full_declaraion(self, data: dict) -> dict:
+
         """Функция забирает более полные данные по выданой декларации.
         Далее в теле используем функцию get_multi_info() в которой
         формируется файл с информацией о схеме декларирования"""
@@ -195,6 +197,7 @@ class Declaration():
                 i['Схема'] = scheme_dec
                 i['Статус'] = dec_status
         return data
+<<<<<<< HEAD
 
 
 # def main():
@@ -251,3 +254,5 @@ if __name__ == "__main__":
 # if __name__ == "__main__":
 #     main()
 >>>>>>> f2db024 (optimise code and delete username and password)
+=======
+>>>>>>> 0eb89e1 (optimize code)

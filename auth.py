@@ -7,7 +7,7 @@ class FsaAuth:
 
     """ Данный класс получает токен авторизации и проверяет его валидность"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.ua = UserAgent()
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
@@ -38,7 +38,7 @@ class FsaAuth:
         data = dict(response.headers)
         os.environ['FSA_TOKEN'] = data.get('Authorization')
 
-    def validation_token(self):
+    def validation_token(self) -> bool:
 
         """ Проверка токена на валидность"""
 
@@ -58,6 +58,7 @@ class FsaAuth:
         valid = response.text
         return valid
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 def get_auth(url='https://pub.fsa.gov.ru/login'):
     response = requests.post(
@@ -98,6 +99,9 @@ def get_token(token=token):
         get_auth()
 =======
     def get_token(self):
+=======
+    def get_token(self) -> str:
+>>>>>>> 0eb89e1 (optimize code)
 
         """ Получение токена, если есть существующий,
             то проверяется его валидность"""
@@ -106,9 +110,12 @@ def get_token(token=token):
             return self.token
         else:
             self.get_auth()
+<<<<<<< HEAD
 >>>>>>> 0a3e18c (	modified:   auth.py)
 
 
 # if __name__ == "__main__":
 #     fsa_client = FsaAuth()
 #     fsa_client.get_token()
+=======
+>>>>>>> 0eb89e1 (optimize code)
