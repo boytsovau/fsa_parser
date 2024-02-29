@@ -24,8 +24,8 @@ class FsaAuth:
         }
         self.token = {'token': os.getenv('FSA_TOKEN')}
         self.json_data = {
-            'username': 'anonymous',
-            'password': 'hrgesf7HDR67Bd',
+            'username': os.getenv('FSA_USERNAME'),
+            'password': os.getenv('FSA_PASSWORD'),
         }
 
     def get_auth(self, url='https://pub.fsa.gov.ru/login'):
@@ -36,8 +36,7 @@ class FsaAuth:
                                  json=self.json_data,
                                  verify=False)
         data = dict(response.headers)
-        self.token['token'] = data.get('Authorization')
-        os.environ['FSA_TOKEN'] = self.token['token']
+        os.environ['FSA_TOKEN'] = data.get('Authorization')
 
     def validation_token(self):
 
@@ -70,6 +69,6 @@ class FsaAuth:
             self.get_auth()
 
 
-if __name__ == "__main__":
-    fsa_client = FsaAuth()
-    fsa_client.get_token()
+# if __name__ == "__main__":
+#     fsa_client = FsaAuth()
+#     fsa_client.get_token()
