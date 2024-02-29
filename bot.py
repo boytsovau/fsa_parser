@@ -4,12 +4,7 @@ import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
-<<<<<<< HEAD
 from main import Declaration
-
-load_dotenv()
-=======
-from main import get_declaration
 
 load_dotenv()
 
@@ -41,6 +36,8 @@ async def get_info(message: types.Message):
         date = datetime.datetime.now()
         file.write(str(date) + ':' + str(user_status) + '\n')
 
+    dec = Declaration(message.text)
+    result = dec.get_declaration()
     dec = Declaration(message.text)
     result = dec.get_declaration()
 
