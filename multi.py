@@ -2,7 +2,6 @@ import requests
 import os
 import logging
 from fake_useragent import UserAgent
-from proxy_data import proxies
 
 
 ua = UserAgent()
@@ -83,7 +82,7 @@ def get_multi_info(id, scheme, reglaments, status):
         'https://pub.fsa.gov.ru/nsi/api/multi',
         json=json_data,
         headers=headers,
-        # proxies=proxies,
+        # proxies=os.getnenv("PROXY"),
         verify=False).json()
 
     data_full = {}

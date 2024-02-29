@@ -7,12 +7,17 @@ from multi import get_multi_info
 from fake_useragent import UserAgent
 
 
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG, filename="bot.log")
+logging.basicConfig(format='%(asctime)s - %(message)s',
+                    datefmt='%d-%b-%y %H:%M:%S',
+                    level=logging.DEBUG,
+                    filename="bot.log")
 
 ua = UserAgent()
 
 
-def get_declaration(dec_num):
+def get_declaration(dec_num: str) -> dict:
+
+    """Функция запрашивает информацию по декларации"""
 
     fsa_auth = FsaAuth()
     fsa_auth.get_token()
@@ -29,8 +34,6 @@ def get_declaration(dec_num):
         'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
         'User-Agent': f'{ua.random}',
     }
-
-    """Функция запрашивает информацию по декларации"""
 
     json_data = {
         'size': 10,
@@ -91,7 +94,7 @@ def get_declaration(dec_num):
             headers=headers,
             json=json_data,
             verify=False,
-            # proxies=proxies
+            # proxies=os.getnenv("PROXY")
         )
         logging.debug(response)
     except Exception as ex:
@@ -150,7 +153,7 @@ def get_declaration(dec_num):
 
     def get_one_full_declaraion(self, data: dict) -> dict:
 
-def get_one_full_declaraion(data):
+def get_one_full_declaraion(data: dict) -> dict:
     """Функция забирает более полные данные по выданой декларации.
     Далее в теле используем функцию get_multi_info() в которой
     формируется файл с информацией о схеме декларирования"""
