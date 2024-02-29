@@ -7,7 +7,7 @@ class FsaAuth:
 
     """ Данный класс получает токен авторизации и проверяет его валидность"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.ua = UserAgent()
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
@@ -38,7 +38,7 @@ class FsaAuth:
         data = dict(response.headers)
         os.environ['FSA_TOKEN'] = data.get('Authorization')
 
-    def validation_token(self):
+    def validation_token(self) -> bool:
 
         """ Проверка токена на валидность"""
 
@@ -58,7 +58,7 @@ class FsaAuth:
         valid = response.text
         return valid
 
-    def get_token(self):
+    def get_token(self) -> str:
 
         """ Получение токена, если есть существующий,
             то проверяется его валидность"""
@@ -67,8 +67,3 @@ class FsaAuth:
             return self.token
         else:
             self.get_auth()
-
-
-# if __name__ == "__main__":
-#     fsa_client = FsaAuth()
-#     fsa_client.get_token()
