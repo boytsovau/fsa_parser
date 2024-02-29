@@ -24,7 +24,8 @@ async def start(message: types.Message):
 @dp.message_handler()
 async def get_info(message: types.Message):
     await message.answer("Нужно подождать.....")
-    user_status = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
+    user_status = await bot.get_chat_member(chat_id=message.chat.id,
+                                            user_id=message.from_user.id)
     with open("users.log", "a") as file:
         date = datetime.datetime.now()
         file.write(str(date) + ':' + str(user_status) + '\n')

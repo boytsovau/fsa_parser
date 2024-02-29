@@ -1,10 +1,12 @@
 import requests
 import os
 from fake_useragent import UserAgent
-from proxy_data import proxies
 
 
 class FsaAuth:
+
+    """ Данный класс получает токен авторизации и проверяет его валидность"""
+
     def __init__(self):
         self.ua = UserAgent()
         self.headers = {
@@ -27,12 +29,20 @@ class FsaAuth:
         }
 
     def get_auth(self, url='https://pub.fsa.gov.ru/login'):
-        response = requests.post(url, headers=self.headers, json=self.json_data, verify=False)
+
+        """ Получение токена авторизации"""
+
+        response = requests.post(url, headers=self.headers,
+                                 json=self.json_data,
+                                 verify=False)
         data = dict(response.headers)
         self.token['token'] = data.get('Authorization')
         os.environ['FSA_TOKEN'] = self.token['token']
 
     def validation_token(self):
+
+        """ Проверка токена на валидность"""
+
         headers = {
             'Accept': 'application/json, text/plain, */*',
             'Accept-Language': 'ru-RU,ru;q=0.9',
@@ -44,7 +54,8 @@ class FsaAuth:
             'Sec-Fetch-Site': 'same-origin',
             'User-Agent': f'{self.ua.random}',
         }
-        response = requests.get('https://pub.fsa.gov.ru/token/is/actual/', headers=headers, verify=False)
+        response = requests.get('https://pub.fsa.gov.ru/token/is/actual/',
+                                headers=headers, verify=False)
         valid = response.text
         return valid
 
@@ -88,6 +99,10 @@ def get_token(token=token):
         get_auth()
 =======
     def get_token(self):
+
+        """ Получение токена, если есть существующий,
+            то проверяется его валидность"""
+
         if self.validation_token() == 'true':
             return self.token
         else:
