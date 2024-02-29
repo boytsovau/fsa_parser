@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.markdown import hbold
-from main import get_declaration
+from main import Declaration
 
 load_dotenv()
 
@@ -30,7 +30,8 @@ async def get_info(message: types.Message):
         date = datetime.datetime.now()
         file.write(str(date) + ':' + str(user_status) + '\n')
 
-    result = get_declaration(message.text)
+    dec = Declaration(message.text)
+    result = dec.get_declaration()
 
     try:
         if result:
