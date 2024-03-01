@@ -190,8 +190,8 @@ class Declaration():
                 multi = get_multi_info(dec_id, scheme, reglaments, status)
                 scheme_dec = multi.get('id').get(dec_id).get('scheme')
                 dec_status = multi.get('status').get(dec_id).get('status')
-                i['Схема'] = scheme_dec
-                i['Статус'] = dec_status
+                i['Scheme'] = scheme_dec
+                i['Status'] = dec_status
         return data
 <<<<<<< HEAD
 
