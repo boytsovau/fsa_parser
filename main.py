@@ -13,21 +13,18 @@ logging.basicConfig(format='%(asctime)s - %(message)s',
                     filename="bot.log")
 
 
-class Declaration(FsaAuth):
+class Declaration():
 
     def __init__(self, dec_num: str) -> None:
         self.ua = UserAgent()
-        super().get_token()
+        self.auth = FsaAuth()
+        self.auth.get_token()
         self.dec_num = dec_num
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
             'Authorization': os.getenv('FSA_TOKEN'),
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
             'Content-Type': 'application/json',
             'Origin': 'https://pub.fsa.gov.ru',
-            'Pragma': 'no-cache',
             'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
             'User-Agent': f'{self.ua.random}',
         }
