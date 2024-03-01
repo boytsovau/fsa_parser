@@ -46,8 +46,8 @@ async def get_info(message: types.Message):
                         f"{hbold('Заявитель: ')} {i.get('Applicant')}\n" \
                         f"{hbold('Производитель: ')} {i.get('Manufacturer')}\n" \
                         f"{hbold('Продукция: ')} {i.get('Production')}\n" \
-                        f"{hbold('Схема: ')} {i.get('Схема')}\n" \
-                        f"{hbold('Статус: ')} {i.get('Статус')}\n" \
+                        f"{hbold('Схема: ')} {i.get('Scheme')}\n" \
+                        f"{hbold('Статус: ')} {i.get('Status')}\n" \
                         f"{hbold('Ссылка: ')} https://pub.fsa.gov.ru/rds/declaration/view/{i.get('id')}/common\n" \
                         f"{hbold('============================')}\n"
                     await message.answer(info)
