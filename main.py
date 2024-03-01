@@ -13,12 +13,11 @@ logging.basicConfig(format='%(asctime)s - %(message)s',
                     filename="bot.log")
 
 
-class Declaration():
+class Declaration(FsaAuth):
 
     def __init__(self, dec_num: str) -> None:
         self.ua = UserAgent()
-        fsa_auth = FsaAuth()
-        fsa_auth.get_token()
+        super().get_token()
         self.dec_num = dec_num
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
