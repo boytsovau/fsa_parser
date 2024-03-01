@@ -26,12 +26,6 @@ def get_multi_info(id, scheme, reglaments, status):
             'validationFormNormDoc': [
                 {
                     'id': reglaments,
-                    'fields': [
-                        'id',
-                        'masterId',
-                        'name',
-                        'docNum',
-                    ],
                 },
             ],
             'validationScheme2': [
@@ -39,35 +33,12 @@ def get_multi_info(id, scheme, reglaments, status):
                     'id': [
                         f'{scheme}',
                     ],
-                    'fields': [
-                        'id',
-                        'masterId',
-                        'name',
-                        'validityTerm',
-                        'isSeriesProduction',
-                        'isBatchProduction',
-                        'isOneOffProduction',
-                        'isProductSampleTesting',
-                        'isBatchProductTesting',
-                        'isOneOffProductTesting',
-                        'isAccreditationLab',
-                        'isApplicantManufacturer',
-                        'isApplicantProvider',
-                        'isPresenceOfProxy',
-                        'isApplicantForeign',
-                        'isApplicantEeuMember',
-                    ],
                 },
             ],
             'status': [
                 {
                     'id': [
                         status,
-                    ],
-                    'fields': [
-                        'id',
-                        'masterId',
-                        'name',
                     ],
                 },
             ],

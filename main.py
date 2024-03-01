@@ -32,22 +32,6 @@ class Declaration():
             'size': 10,
             'page': 0,
             'filter': {
-                'status': [],
-                'idDeclType': [],
-                'idCertObjectType': [],
-                'idProductType': [],
-                'idGroupRU': [],
-                'idGroupEEU': [],
-                'idTechReg': [],
-                'idApplicantType': [],
-                'regDate': {
-                    'minDate': None,
-                    'maxDate': None,
-                },
-                'endDate': {
-                    'minDate': None,
-                    'maxDate': None,
-                },
                 'columnsSearch': [
                     {
                         'name': 'number',
@@ -56,26 +40,7 @@ class Declaration():
                         'translated': False,
                     },
                 ],
-                'idProductOrigin': [],
-                'idProductEEU': [],
-                'idProductRU': [],
-                'idDeclScheme': [],
-                'awaitForApprove': None,
-                'awaitOperatorCheck': None,
-                'editApp': None,
-                'violationSendDate': None,
-                'isProtocolInvalid': None,
-                'resultChecker': None,
-                'statusChecker': None,
-                'protocolsChecker': None,
-                'mistakeFound': None,
-            },
-            'columnsSort': [
-                {
-                    'column': 'declDate',
-                    'sort': 'DESC',
-                },
-            ],
+            }
         }
 
     def get_declaration(self) -> dict:
