@@ -11,15 +11,10 @@ class FsaAuth:
         self.ua = UserAgent()
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
             'Authorization': os.getenv('FSA_TOKEN'),
-            'Connection': 'keep-alive',
             'Content-Type': 'application/json',
             'Origin': 'https://pub.fsa.gov.ru',
             'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
             'User-Agent': f'{self.ua.random}',
         }
         self.token = {'token': os.getenv('FSA_TOKEN')}
