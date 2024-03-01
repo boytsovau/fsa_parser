@@ -14,13 +14,9 @@ def get_multi_info(id, scheme, reglaments, status):
     logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
     headers = {
             'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
             'Authorization': os.getenv('FSA_TOKEN'),
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
             'Content-Type': 'application/json',
             'Origin': 'https://pub.fsa.gov.ru',
-            'Pragma': 'no-cache',
             'Referer': f'https://pub.fsa.gov.ru/rds/declaration/view/{id}/common',
             'User-Agent': f'{ua.random}'
         }
