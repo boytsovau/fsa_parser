@@ -64,7 +64,6 @@ class Declaration():
 
         logging.info(f'Первый запрос{response}')
 
-
         if response.status_code != 200:
             return None
         else:
