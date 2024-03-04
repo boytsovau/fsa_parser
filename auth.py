@@ -9,6 +9,7 @@ class FsaAuth:
 
     def __init__(self) -> None:
         self.ua = UserAgent()
+        self.proxies = {'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
             'Authorization': os.getenv('FSA_TOKEN'),
@@ -29,6 +30,7 @@ class FsaAuth:
 
         response = requests.post(url, headers=self.headers,
                                  json=self.json_data,
+                                 proxies=self.proxies,
                                  verify=False)
         data = dict(response.headers)
         os.environ['FSA_TOKEN'] = data.get('Authorization')
@@ -49,7 +51,9 @@ class FsaAuth:
             'User-Agent': f'{self.ua.random}',
         }
         response = requests.get('https://pub.fsa.gov.ru/token/is/actual/',
-                                headers=headers, verify=False)
+                                headers=headers,
+                                proxies=self.proxies,
+                                verify=False)
         valid = response.text
         return valid
 
