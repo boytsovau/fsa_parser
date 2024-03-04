@@ -42,29 +42,7 @@ class Declaration():
             }
         }
 
-<<<<<<< HEAD
-    logging.debug(json_data)
-    logging.debug(f"get_dec____ {os.getenv('FSA_TOKEN')}")
-    s = requests.session()
-    try:
-        response = s.post(
-            'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/get',
-            headers=headers,
-            json=json_data,
-            verify=False,
-<<<<<<< HEAD
-            proxies=proxies
-=======
-            # proxies=os.getnenv("PROXY")
->>>>>>> 36891d7 (add proxy to env)
-        )
-        logging.debug(response)
-    except Exception as ex:
-        logging.debug(ex)
-        return None
-=======
     def get_declaration(self) -> dict:
->>>>>>> f2db024 (optimise code and delete username and password)
 
         """Функция запрашивает информацию по декларации"""
 
