@@ -213,5 +213,4 @@ class Declaration():
         data_full['id'] = {id: {'scheme': decl_scheme}}
         data_full['status'] = {id: {'status': decl_status}}
         logging.info(data_full)
-        logging.info(data_full)
         return data_full
