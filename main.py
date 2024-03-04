@@ -114,6 +114,7 @@ class Declaration():
             collected_id['declaration'] = declaration
             index += 1
         logging.info(collected_id)
+        logging.info(collected_id)
         return collected_id
 
     def get_one_full_declaraion(self, data: dict) -> dict:
@@ -209,10 +210,12 @@ class Declaration():
             verify=False).json()
 
         logging.info(f'Обработка в JSON_multi {response}')
+        logging.info(f'Обработка в JSON_multi {response}')
         data_full = {}
         decl_scheme = response.get("validationScheme2", [{}])[0].get('name', '')
         decl_status = response.get("status")[0].get('name')
         data_full['id'] = {id: {'scheme': decl_scheme}}
         data_full['status'] = {id: {'status': decl_status}}
+        logging.info(data_full)
         logging.info(data_full)
         return data_full
