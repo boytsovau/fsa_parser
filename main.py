@@ -48,7 +48,7 @@ class Declaration():
     def get_declaration(self) -> dict:
 
         """Функция запрашивает информацию по декларации"""
-
+        logging.debug(self.proxies)
         logging.debug(self.json_data)
         logging.debug(f"get_dec____ {os.getenv('FSA_TOKEN')}")
         s = requests.session()
