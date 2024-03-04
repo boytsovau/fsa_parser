@@ -112,6 +112,7 @@ class Declaration():
             )
             collected_id['declaration'] = declaration
             index += 1
+        logging.info(collected_id)
         return collected_id
 
     def get_one_full_declaraion(self, data: dict) -> dict:
@@ -121,6 +122,7 @@ class Declaration():
         формируется файл с информацией о схеме декларирования"""
 
         for items in data.values():
+            logging.info(items)
             for i in items:
                 dec_id = i.get('id')
                 response = requests.get(
@@ -129,9 +131,12 @@ class Declaration():
                     proxies=self.proxies,
                     proxies=self.proxies,
                     verify=False).json()
-                scheme = response.get('idDeclScheme')
-                reglaments = response.get('idTechnicalReglaments')
-                status = response.get('idStatus')
+                scheme = response.get('idDeclScheme', '')
+                reglaments = response.get('idTechnicalReglaments', '')
+                status = response.get('idStatus', '')
+                if scheme is None:
+                    scheme = 2
+                logging.debug(f" цикл {scheme}, {reglaments}, {status}")
                 multi = self.get_multi_info(dec_id, scheme, reglaments, status)
                 scheme_dec = multi.get('id').get(dec_id).get('scheme')
                 dec_status = multi.get('status').get(dec_id).get('status')
@@ -189,9 +194,11 @@ class Declaration():
             proxies=self.proxies,
             verify=False).json()
 
+        logging.info(f'Обработка в JSON_multi {response}')
         data_full = {}
         decl_scheme = response.get("validationScheme2")[0].get('name')
         decl_status = response.get("status")[0].get('name')
         data_full['id'] = {id: {'scheme': decl_scheme}}
         data_full['status'] = {id: {'status': decl_status}}
+        logging.info(data_full)
         return data_full
