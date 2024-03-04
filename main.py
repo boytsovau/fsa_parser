@@ -55,7 +55,7 @@ class Declaration():
                 headers=self.headers,
                 json=self.json_data,
                 verify=False,
-                # proxies=os.getnenv("PROXY")
+                proxies=json.loads(os.getenv("PROXY")),
             )
             logging.debug(response)
         except Exception as ex:
@@ -124,7 +124,7 @@ class Declaration():
                 response = requests.get(
                     url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
                     headers=self.headers,
-                    # proxies=os.getnenv("PROXY"),
+                    proxies=json.loads(os.getenv("PROXY")),
                     verify=False).json()
                 scheme = response.get('idDeclScheme')
                 reglaments = response.get('idTechnicalReglaments')
@@ -182,7 +182,7 @@ class Declaration():
             'https://pub.fsa.gov.ru/nsi/api/multi',
             json=json_data,
             headers=headers,
-            # proxies=os.getnenv("PROXY"),
+            proxies=json.loads(os.getenv("PROXY")),
             verify=False).json()
 
         data_full = {}
