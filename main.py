@@ -64,6 +64,7 @@ class Declaration():
 
         logging.info(f'Первый запрос{response}')
 
+
         if response.status_code != 200:
             return None
         else:
@@ -110,7 +111,6 @@ class Declaration():
             )
             collected_id['declaration'] = declaration
             index += 1
-        return collected_id
 
     def get_one_full_declaraion(self, data: dict) -> dict:
 
