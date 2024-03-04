@@ -3,7 +3,6 @@ import json
 import os
 import logging
 from auth import FsaAuth
-from multi import get_multi_info
 from fake_useragent import UserAgent
 
 
@@ -170,9 +169,65 @@ class Declaration():
                 scheme = response.get('idDeclScheme')
                 reglaments = response.get('idTechnicalReglaments')
                 status = response.get('idStatus')
-                multi = get_multi_info(dec_id, scheme, reglaments, status)
+                multi = self.get_multi_info(dec_id, scheme, reglaments, status)
                 scheme_dec = multi.get('id').get(dec_id).get('scheme')
                 dec_status = multi.get('status').get(dec_id).get('status')
                 i['Scheme'] = scheme_dec
                 i['Status'] = dec_status
         return data
+
+    def get_multi_info(self, id: str,
+                       scheme: str,
+                       reglaments: str,
+                       status: str) -> dict:
+
+        '''Функция для получения развернутых данных по схеме
+        и статусу декларации'''
+
+        logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
+        headers = {
+                'Accept': 'application/json, text/plain, */*',
+                'Authorization': os.getenv('FSA_TOKEN'),
+                'Content-Type': 'application/json',
+                'Origin': 'https://pub.fsa.gov.ru',
+                'Referer': f'https://pub.fsa.gov.ru/rds/declaration/view/{id}/common',
+                'User-Agent': f'{self.ua.random}'
+            }
+
+        json_data = {
+            'items': {
+                'validationFormNormDoc': [
+                    {
+                        'id': reglaments,
+                    },
+                ],
+                'validationScheme2': [
+                    {
+                        'id': [
+                            f'{scheme}',
+                        ],
+                    },
+                ],
+                'status': [
+                    {
+                        'id': [
+                            status,
+                        ],
+                    },
+                ],
+            },
+        }
+
+        response = requests.post(
+            'https://pub.fsa.gov.ru/nsi/api/multi',
+            json=json_data,
+            headers=headers,
+            # proxies=os.getnenv("PROXY"),
+            verify=False).json()
+
+        data_full = {}
+        decl_scheme = response.get("validationScheme2")[0].get('name')
+        decl_status = response.get("status")[0].get('name')
+        data_full['id'] = {id: {'scheme': decl_scheme}}
+        data_full['status'] = {id: {'status': decl_status}}
+        return data_full
