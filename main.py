@@ -124,7 +124,7 @@ class Declaration():
                 response = requests.get(
                     url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
                     headers=self.headers,
-                    # proxies=proxies,
+                    # proxies=os.getnenv("PROXY"),
                     verify=False).json()
                 scheme = response.get('idDeclScheme')
                 reglaments = response.get('idTechnicalReglaments')
