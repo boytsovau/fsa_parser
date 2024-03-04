@@ -20,7 +20,6 @@ class Declaration():
         self.auth.get_token()
         self.dec_num = dec_num
         self.proxies = {'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
-        self.proxies = {'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
             'Authorization': os.getenv('FSA_TOKEN'),
@@ -128,7 +127,6 @@ class Declaration():
                     url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
                     headers=self.headers,
                     proxies=self.proxies,
-                    proxies=self.proxies,
                     verify=False).json()
                 scheme = response.get('idDeclScheme', '')
                 reglaments = response.get('idTechnicalReglaments', '')
@@ -189,7 +187,6 @@ class Declaration():
             'https://pub.fsa.gov.ru/nsi/api/multi',
             json=json_data,
             headers=headers,
-            proxies=self.proxies,
             proxies=self.proxies,
             verify=False).json()
 
