@@ -57,7 +57,6 @@ class Declaration():
                 json=self.json_data,
                 verify=False,
                 proxies=self.proxies,
-                proxies=self.proxies,
             )
             logging.debug(response)
         except Exception as ex:
