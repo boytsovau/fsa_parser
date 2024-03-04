@@ -110,6 +110,7 @@ class Declaration():
             )
             collected_id['declaration'] = declaration
             index += 1
+        return collected_id
 
     def get_one_full_declaraion(self, data: dict) -> dict:
 
