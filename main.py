@@ -134,8 +134,6 @@ class Declaration():
                 scheme = response.get('idDeclScheme', '')
                 reglaments = response.get('idTechnicalReglaments', '')
                 status = response.get('idStatus', '')
-                if scheme is None:
-                    scheme = 2
                 logging.debug(f" цикл {scheme}, {reglaments}, {status}")
                 multi = self.get_multi_info(dec_id, scheme, reglaments, status)
                 scheme_dec = multi.get('id').get(dec_id).get('scheme')
@@ -162,7 +160,7 @@ class Declaration():
                 'User-Agent': f'{self.ua.random}'
             }
 
-        json_data = {
+        json_data_full = {
             'items': {
                 'validationFormNormDoc': [
                     {
@@ -186,6 +184,23 @@ class Declaration():
             },
         }
 
+        json_data_small = {
+            'items': {
+                'status': [
+                    {
+                        'id': [
+                            status,
+                        ],
+                    },
+                ],
+            },
+        }
+
+        if scheme is None:
+            json_data = json_data_small
+        else:
+            json_data = json_data_full
+
         response = requests.post(
             'https://pub.fsa.gov.ru/nsi/api/multi',
             json=json_data,
@@ -196,7 +211,7 @@ class Declaration():
 
         logging.info(f'Обработка в JSON_multi {response}')
         data_full = {}
-        decl_scheme = response.get("validationScheme2")[0].get('name')
+        decl_scheme = response.get("validationScheme2", [{}])[0].get('name', '')
         decl_status = response.get("status")[0].get('name')
         data_full['id'] = {id: {'scheme': decl_scheme}}
         data_full['status'] = {id: {'status': decl_status}}
