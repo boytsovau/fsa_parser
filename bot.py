@@ -9,9 +9,6 @@ from main import Declaration
 load_dotenv()
 
 TOKEN = os.getenv('BOT_TOKEN')
->>>>>>> 4fa3687 (	modified:   auth.py)
-
-TOKEN = os.getenv('BOT_TOKEN')
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S',
@@ -36,8 +33,6 @@ async def get_info(message: types.Message):
         date = datetime.datetime.now()
         file.write(str(date) + ':' + str(user_status) + '\n')
 
-    dec = Declaration(message.text)
-    result = dec.get_declaration()
     dec = Declaration(message.text)
     result = dec.get_declaration()
 

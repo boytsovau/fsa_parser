@@ -63,22 +63,8 @@ class Declaration():
             return None
 
         logging.info(f'Первый запрос{response}')
-        logging.info(f'Первый запрос{response}')
 
-        if response.status_code != 200:
-            return None
-        else:
-            resp = json.loads(response.text)
-            logging.info(f'Обработка в JSON {resp}')
-            logging.info(f'Сработал else и скрипт продолжил работу \
-                         {response.status_code}')
-            if len(resp.get('items')) != 0:
-                data = self.get_declaration_sorted(resp)
-                result = self.get_one_full_declaraion(data)
-                logging.info(result)
-                return result
-            else:
-                return False
+
         if response.status_code != 200:
             return None
         else:
@@ -103,19 +89,7 @@ class Declaration():
         declaration = []
         index = 0
         id = data.get('items')
-        collected_id = {}
-        declaration = []
-        index = 0
-        id = data.get('items')
 
-        for item in id:
-            declaration_id = item.get('id')
-            declaration_number = item.get('number')
-            date_regist = item.get('declDate')
-            date_issue = item.get('declEndDate')
-            applicant = item.get('applicantName')
-            manufacturer = item.get('manufacterName')
-            product_name = item.get('productFullName')
         for item in id:
             declaration_id = item.get('id')
             declaration_number = item.get('number')
@@ -137,20 +111,6 @@ class Declaration():
             )
             collected_id['declaration'] = declaration
             index += 1
-        return collected_id
-            declaration.append({
-                'id': declaration_id,
-                'number': declaration_number,
-                'Register Date': date_regist,
-                'Issue Date': date_issue,
-                'Applicant': applicant,
-                'Manufacturer': manufacturer,
-                'Production': product_name
-                }
-            )
-            collected_id['declaration'] = declaration
-            index += 1
-        return collected_id
 
     def get_one_full_declaraion(self, data: dict) -> dict:
 
