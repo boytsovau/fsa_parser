@@ -135,67 +135,6 @@ class Declaration():
                 i['Scheme'] = scheme_dec
                 i['Status'] = dec_status
         return data
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-# def main():
-#     dec = Declaration(dec_num=123)
-#     dec.get_declaration()
-
-
-<<<<<<< HEAD
-def get_one_full_declaraion(data: dict) -> dict:
-    """Функция забирает более полные данные по выданой декларации.
-    Далее в теле используем функцию get_multi_info() в которой
-    формируется файл с информацией о схеме декларирования"""
-
-    logging.debug(f"get_dec__full__ {os.getenv('FSA_TOKEN')}")
-    headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Authorization': os.getenv('FSA_TOKEN'),
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/json',
-        'Origin': 'https://pub.fsa.gov.ru',
-        'Pragma': 'no-cache',
-        'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
-        'User-Agent': f'{ua.random}',
-    }
-
-    for items in data.values():
-        for i in items:
-            dec_id = i.get('id')
-            response = requests.get(
-                url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
-                headers=headers,
-                proxies=proxies,
-                verify=False).json()
-            scheme = response.get('idDeclScheme')
-            reglaments = response.get('idTechnicalReglaments')
-            status = response.get('idStatus')
-            multi = get_multi_info(dec_id, scheme, reglaments, status)
-            scheme_dec = multi.get('id').get(dec_id).get('scheme')
-            dec_status = multi.get('status').get(dec_id).get('status')
-            i['Схема'] = scheme_dec
-            i['Статус'] = dec_status
-    return data
-
-
-def main():
-    get_declaration()
-
-
-if __name__ == "__main__":
-    main()
-=======
-# if __name__ == "__main__":
-#     main()
->>>>>>> f2db024 (optimise code and delete username and password)
-=======
->>>>>>> 0eb89e1 (optimize code)
-=======
 
     def get_multi_info(self, id: str,
                        scheme: str,
@@ -252,4 +191,3 @@ if __name__ == "__main__":
         data_full['id'] = {id: {'scheme': decl_scheme}}
         data_full['status'] = {id: {'status': decl_status}}
         return data_full
->>>>>>> c41b71f (remove multi.py)
