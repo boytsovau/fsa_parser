@@ -1,8 +1,12 @@
 import logging
 import datetime
+import asyncio
 import os
 from dotenv import load_dotenv
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, enums, types
+from aiogram.types import Message
+from aiogram.filters import CommandStart
+from aiogram.client.bot import DefaultBotProperties
 from logging.handlers import RotatingFileHandler
 from aiogram.utils.markdown import hbold
 from main import Declaration
@@ -21,16 +25,16 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML)
-dp = Dispatcher(bot)
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=enums.ParseMode.HTML))
+dp = Dispatcher()
 
 
-@dp.message_handler(commands="start")
-async def start(message: types.Message):
+@dp.message(CommandStart())
+async def start(message: Message):
     await message.answer('Введите номер декларации')
 
 
-@dp.message_handler()
+@dp.message()
 async def get_info(message: types.Message):
     await message.answer("Нужно подождать.....")
     user_status = await bot.get_chat_member(chat_id=message.chat.id,
@@ -66,9 +70,9 @@ async def get_info(message: types.Message):
         await message.answer("Попробуйте позже")
 
 
-def main():
-    executor.start_polling(dp)
+async def main():
+    await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
