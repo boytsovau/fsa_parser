@@ -4,10 +4,13 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, enums, types
+from aiogram import F
 from aiogram.types import Message
 from aiogram.filters import CommandStart
 from aiogram.client.bot import DefaultBotProperties
 from logging.handlers import RotatingFileHandler
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
 from aiogram.utils.markdown import hbold
 from main import Declaration
 
@@ -29,14 +32,44 @@ bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=enums.ParseMode.H
 dp = Dispatcher()
 
 
+class FindInfo(StatesGroup):
+    decl_num = State()
+    decl_find = State()
+    sert_num = State()
+    sert_find = State()
+
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer('Введите номер декларации')
+    # await message.answer('Введите номер декларации')
+    kb = [
+            [
+                types.KeyboardButton(text="Декларации"),
+                types.KeyboardButton(text="Сертификаты")
+            ],
+    ]
+    keyboard = types.ReplyKeyboardMarkup(
+        keyboard=kb,
+        resize_keyboard=True,
+    )
+    await message.answer('Выберите реестр', reply_markup=keyboard)
 
 
-@dp.message()
-async def get_info(message: types.Message):
+@dp.message(F.text.lower() == "декларации")
+async def get_answer(message: Message, state: FSMContext):
+    await message.answer("Введите номер декларации")
+    await state.set_state(FindInfo.decl_num)
+
+
+@dp.message(F.text.lower() == "сертификаты")
+async def get_answer2(message: Message, state: FSMContext):
+    await message.answer("Введите номер сертификата")
+    await state.set_state(FindInfo.sert_num)
+
+
+@dp.message(FindInfo.decl_num)
+async def get_info(message: Message, state: FSMContext):
     await message.answer("Нужно подождать.....")
+    await state.set_state(FindInfo.decl_find)
     user_status = await bot.get_chat_member(chat_id=message.chat.id,
                                             user_id=message.from_user.id)
     with open("users.log", "a") as file:
@@ -68,6 +101,15 @@ async def get_info(message: types.Message):
             await message.answer("Нет информации")
     except Exception:
         await message.answer("Попробуйте позже")
+
+    await state.clear()
+
+
+@dp.message(FindInfo.sert_num)
+async def get_info2(message: Message, state: FSMContext):
+    await message.answer("Сервис в разработке")
+    await state.set_state(FindInfo.sert_find)
+    await state.clear()
 
 
 async def main():
