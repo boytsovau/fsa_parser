@@ -3,6 +3,7 @@ import datetime
 import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
+from logging.handlers import RotatingFileHandler
 from aiogram.utils.markdown import hbold
 from main import Declaration
 
@@ -10,10 +11,15 @@ load_dotenv()
 
 TOKEN = os.getenv('BOT_TOKEN')
 
-logging.basicConfig(format='%(asctime)s - %(message)s',
-                    datefmt='%d-%b-%y %H:%M:%S',
-                    level=logging.DEBUG,
-                    filename="bot.log")
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+handler = RotatingFileHandler('bot.log', maxBytes=1000000, backupCount=5)
+formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',)
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+
 
 bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
