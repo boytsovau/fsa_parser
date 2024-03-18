@@ -81,7 +81,7 @@ class Certificate():
     def get_certificate_sorted(self, data: dict) -> dict:
 
         """Функция вытягивает только нужные для нас поля
-        из общих данных по декларации"""
+        из общих данных по сертификату"""
 
         collected_id = {}
         certificate = []
@@ -92,9 +92,9 @@ class Certificate():
             certificate_number = item.get('number')
             date_regist = item.get('certRegate')
             date_issue = item.get('certEndDate')
-            applicant = item.get('applicant').get('shortname')
-            manufacturer = item.get('manufacterName')
-            product_name = item.get('productFullName')
+            applicant = item.get('applicant').get('shortName')
+            manufacturer = item.get('manufacter').get('fullName')
+            product_name = item.get('product').get('fullName')
 
             certificate.append({
                 'id': certificate_id,
@@ -110,18 +110,18 @@ class Certificate():
         logging.info(collected_id)
         return collected_id
 
-    def get_one_full_declaraion(self, data: dict) -> dict:
+    def get_one_full_certificate(self, data: dict) -> dict:
 
-        """Функция забирает более полные данные по выданой декларации.
+        """Функция забирает более полные данные по выданому сертификату.
         Далее в теле используем функцию get_multi_info() в которой
         формируется файл с информацией о схеме декларирования"""
 
         for items in data.values():
             logging.info(items)
             for i in items:
-                dec_id = i.get('id')
+                сert_id = i.get('idCertificate')
                 response = requests.get(
-                    url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{dec_id}',
+                    url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{cert_id}',
                     headers=self.headers,
                     proxies=self.proxies,
                     verify=False).json()
