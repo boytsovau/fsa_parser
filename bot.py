@@ -135,7 +135,7 @@ async def get_info2(message: Message, state: FSMContext):
                         f"{hbold('Ссылка: ')} https://pub.fsa.gov.ru/rss/certificate/view/{i.get('id')}/baseInfo\n" \
                         f"{hbold('============================')}\n"
                     await message.answer(info)
-                    
+
         if result is None:
             await message.answer('''Сайт Федеральной службы по аккредетации не
                                 доступен, попробуйте позже''')

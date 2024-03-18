@@ -150,7 +150,7 @@ class Certificate():
                 'Authorization': os.getenv('FSA_TOKEN'),
                 'Content-Type': 'application/json',
                 'Origin': 'https://pub.fsa.gov.ru',
-                'Referer': f'https://pub.fsa.gov.ru/rss/certificate',
+                'Referer': 'https://pub.fsa.gov.ru/rss/certificate',
                 'User-Agent': f'{self.ua.random}'
             }
 
