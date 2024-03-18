@@ -103,7 +103,7 @@ async def get_info(message: Message, state: FSMContext):
             await message.answer("Нет информации")
     except Exception:
         await message.answer("Попробуйте позже")
-
+    await message.answer('Выберите реестр')
     await state.clear()
 
 
