@@ -34,7 +34,7 @@ class Certificate():
             'filter': {
                 'columnsSearch': [
                     {
-                        'colimn': 'number',
+                        'column': 'number',
                         'search': self.cert_num,
                     },
                 ],
@@ -46,7 +46,7 @@ class Certificate():
         """Функция запрашивает информацию по сертификату"""
         logging.debug(self.proxies)
         logging.debug(self.json_data)
-        logging.debug(f"get_dec____ {os.getenv('FSA_TOKEN')}")
+        logging.debug(f"get_cert____ {os.getenv('FSA_TOKEN')}")
         s = requests.session()
         try:
             response = s.post(
@@ -88,13 +88,13 @@ class Certificate():
         id = data.get('items')
 
         for item in id:
-            certificate_id = item.get('idCertificate')
+            certificate_id = item.get('id')
             certificate_number = item.get('number')
-            date_regist = item.get('certRegate')
-            date_issue = item.get('certEndDate')
-            applicant = item.get('applicant').get('shortName')
-            manufacturer = item.get('manufacter').get('fullName')
-            product_name = item.get('product').get('fullName')
+            date_regist = item.get('date')
+            date_issue = item.get('endDate')
+            applicant = item.get('applicantName')
+            manufacturer = item.get('manufacterName')
+            product_name = item.get('productFullName')
 
             certificate.append({
                 'id': certificate_id,
@@ -114,24 +114,24 @@ class Certificate():
 
         """Функция забирает более полные данные по выданому сертификату.
         Далее в теле используем функцию get_multi_info() в которой
-        формируется файл с информацией о схеме декларирования"""
+        формируется файл с информацией о схеме сертификаата"""
 
         for items in data.values():
             logging.info(items)
             for i in items:
-                сert_id = i.get('idCertificate')
+                cert_id = i.get('id')
                 response = requests.get(
-                    url=f'https://pub.fsa.gov.ru/api/v1/rds/common/declarations/{cert_id}',
+                    url=f'https://pub.fsa.gov.ru/api/v1/rss/common/certificates/{cert_id}',
                     headers=self.headers,
                     proxies=self.proxies,
                     verify=False).json()
-                scheme = response.get('idDeclScheme', '')
+                scheme = response.get('idCertScheme', '')
                 reglaments = response.get('idTechnicalReglaments', '')
                 status = response.get('idStatus', '')
                 logging.debug(f" цикл {scheme}, {reglaments}, {status}")
-                multi = self.get_multi_info(dec_id, scheme, reglaments, status)
-                scheme_dec = multi.get('id').get(dec_id).get('scheme')
-                dec_status = multi.get('status').get(dec_id).get('status')
+                multi = self.get_multi_info(cert_id, scheme, reglaments, status)
+                scheme_dec = multi.get('id').get(cert_id).get('scheme')
+                dec_status = multi.get('status').get(cert_id).get('status')
                 i['Scheme'] = scheme_dec
                 i['Status'] = dec_status
         return data
@@ -142,7 +142,7 @@ class Certificate():
                        status: str) -> dict:
 
         '''Функция для получения развернутых данных по схеме
-        и статусу декларации'''
+        и статусу сертификата'''
 
         logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
         headers = {
@@ -150,7 +150,7 @@ class Certificate():
                 'Authorization': os.getenv('FSA_TOKEN'),
                 'Content-Type': 'application/json',
                 'Origin': 'https://pub.fsa.gov.ru',
-                'Referer': f'https://pub.fsa.gov.ru/rds/declaration/view/{id}/common',
+                'Referer': f'https://pub.fsa.gov.ru/rss/certificate',
                 'User-Agent': f'{self.ua.random}'
             }
 
@@ -204,9 +204,9 @@ class Certificate():
 
         logging.info(f'Обработка в JSON_multi {response}')
         data_full = {}
-        decl_scheme = response.get("validationScheme2", [{}])[0].get('name', '')
-        decl_status = response.get("status")[0].get('name')
-        data_full['id'] = {id: {'scheme': decl_scheme}}
-        data_full['status'] = {id: {'status': decl_status}}
+        cert_scheme = response.get("validationScheme2", [{}])[0].get('name', '')
+        cert_status = response.get("status")[0].get('name')
+        data_full['id'] = {id: {'scheme': cert_scheme}}
+        data_full['status'] = {id: {'status': cert_status}}
         logging.info(data_full)
         return data_full

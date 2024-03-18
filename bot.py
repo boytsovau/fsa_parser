@@ -13,6 +13,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.utils.markdown import hbold
 from main import Declaration
+from certificate import Certificate
 
 load_dotenv()
 
@@ -108,8 +109,41 @@ async def get_info(message: Message, state: FSMContext):
 
 @dp.message(FindInfo.sert_num)
 async def get_info2(message: Message, state: FSMContext):
-    await message.answer("Сервис в разработке")
+    await message.answer("Нужно подождать.....")
     await state.set_state(FindInfo.sert_find)
+    user_status = await bot.get_chat_member(chat_id=message.chat.id,
+                                            user_id=message.from_user.id)
+    with open("users.log", "a") as file:
+        date = datetime.datetime.now()
+        file.write(str(date) + ':' + str(user_status) + '\n')
+
+    dec = Certificate(message.text)
+    result = dec.get_certificate()
+
+    try:
+        if result:
+            for item in result.values():
+                for i in item:
+                    info = f"{hbold('Номер: ')} {i.get('number')}\n" \
+                        f"{hbold('Дата регистрации: ')} {i.get('Register Date')}\n" \
+                        f"{hbold('Дата окончания: ')} {i.get('Issue Date')}\n" \
+                        f"{hbold('Заявитель: ')} {i.get('Applicant')}\n" \
+                        f"{hbold('Производитель: ')} {i.get('Manufacturer')}\n" \
+                        f"{hbold('Продукция: ')} {i.get('Production')}\n" \
+                        f"{hbold('Схема: ')} {i.get('Scheme')}\n" \
+                        f"{hbold('Статус: ')} {i.get('Status')}\n" \
+                        f"{hbold('Ссылка: ')} https://pub.fsa.gov.ru/rss/certificate/view/{i.get('id')}/baseInfo\n" \
+                        f"{hbold('============================')}\n"
+                    await message.answer(info)
+                    
+        if result is None:
+            await message.answer('''Сайт Федеральной службы по аккредетации не
+                                доступен, попробуйте позже''')
+        if result is False:
+            await message.answer("Нет информации")
+    except Exception:
+        await message.answer("Попробуйте позже")
+    await message.answer('Выберите реестр')
     await state.clear()
 
 
