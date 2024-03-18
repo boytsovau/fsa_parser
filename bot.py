@@ -38,6 +38,7 @@ class FindInfo(StatesGroup):
     sert_num = State()
     sert_find = State()
 
+
 @dp.message(CommandStart())
 async def start(message: Message):
     # await message.answer('Введите номер декларации')

@@ -15,7 +15,6 @@ class FsaAuth:
             'Authorization': os.getenv('FSA_TOKEN'),
             'Content-Type': 'application/json',
             'Origin': 'https://pub.fsa.gov.ru',
-            'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
             'User-Agent': f'{self.ua.random}',
         }
         self.token = {'token': os.getenv('FSA_TOKEN')}
@@ -44,7 +43,6 @@ class FsaAuth:
             'Accept-Language': 'ru-RU,ru;q=0.9',
             'Authorization': self.token.get('token'),
             'Connection': 'keep-alive',
-            'Referer': 'https://pub.fsa.gov.ru/rds/declaration',
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
             'Sec-Fetch-Site': 'same-origin',
