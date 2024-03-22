@@ -44,9 +44,9 @@ class Certificate():
     def get_certificate(self) -> dict:
 
         """Функция запрашивает информацию по сертификату"""
-        logging.debug(self.proxies)
-        logging.debug(self.json_data)
-        logging.debug(f"get_cert____ {os.getenv('FSA_TOKEN')}")
+        # logging.debug(self.proxies)
+        # logging.debug(self.json_data)
+        # logging.debug(f"get_cert____ {os.getenv('FSA_TOKEN')}")
         s = requests.session()
         try:
             response = s.post(
@@ -56,24 +56,24 @@ class Certificate():
                 verify=False,
                 proxies=self.proxies,
             )
-            logging.debug(response)
+            # logging.debug(response)
         except Exception as ex:
             logging.debug(ex)
             return None
 
-        logging.info(f'Первый запрос{response}')
+        # logging.info(f'Первый запрос{response}')
 
         if response.status_code != 200:
             return None
         else:
             resp = json.loads(response.text)
-            logging.info(f'Обработка в JSON {resp}')
-            logging.info(f'Сработал else и скрипт продолжил работу \
-                         {response.status_code}')
+            # logging.info(f'Обработка в JSON {resp}')
+            # logging.info(f'Сработал else и скрипт продолжил работу \
+            #              {response.status_code}')
             if len(resp.get('items')) != 0:
                 data = self.get_certificate_sorted(resp)
                 result = self.get_one_full_certificate(data)
-                logging.info(result)
+                # logging.info(result)
                 return result
             else:
                 return False
@@ -107,7 +107,7 @@ class Certificate():
                 }
             )
             collected_id['certificate'] = certificate
-        logging.info(collected_id)
+        # logging.info(collected_id)
         return collected_id
 
     def get_one_full_certificate(self, data: dict) -> dict:
@@ -117,7 +117,7 @@ class Certificate():
         формируется файл с информацией о схеме сертификаата"""
 
         for items in data.values():
-            logging.info(items)
+            # logging.info(items)
             for i in items:
                 cert_id = i.get('id')
                 response = requests.get(
@@ -128,7 +128,7 @@ class Certificate():
                 scheme = response.get('idCertScheme', '')
                 reglaments = response.get('idTechnicalReglaments', '')
                 status = response.get('idStatus', '')
-                logging.debug(f" цикл {scheme}, {reglaments}, {status}")
+                # logging.debug(f" цикл {scheme}, {reglaments}, {status}")
                 multi = self.get_multi_info(cert_id, scheme, reglaments, status)
                 scheme_dec = multi.get('id').get(cert_id).get('scheme')
                 dec_status = multi.get('status').get(cert_id).get('status')
@@ -144,7 +144,7 @@ class Certificate():
         '''Функция для получения развернутых данных по схеме
         и статусу сертификата'''
 
-        logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
+        # logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
         headers = {
                 'Accept': 'application/json, text/plain, */*',
                 'Authorization': os.getenv('FSA_TOKEN'),
@@ -202,11 +202,11 @@ class Certificate():
             proxies=self.proxies,
             verify=False).json()
 
-        logging.info(f'Обработка в JSON_multi {response}')
+        # logging.info(f'Обработка в JSON_multi {response}')
         data_full = {}
         cert_scheme = response.get("validationScheme2", [{}])[0].get('name', '')
         cert_status = response.get("status")[0].get('name')
         data_full['id'] = {id: {'scheme': cert_scheme}}
         data_full['status'] = {id: {'status': cert_status}}
-        logging.info(data_full)
+        # logging.info(data_full)
         return data_full
