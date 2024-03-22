@@ -203,7 +203,7 @@ async def handle_pagination(callback_query: CallbackQuery):
     logging.debug(r)
     if current_page - 1 >= 0:
         await bot.edit_message_text(f'{r[current_page-1]}', chat_id, message_id, reply_markup=generate_pagination_keyboard(page_count, current_page))
-    
+
 
 @dp.callback_query(F.data == 'back')
 async def handle_pagination_1(callback_query: CallbackQuery):
