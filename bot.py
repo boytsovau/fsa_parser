@@ -4,8 +4,13 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, enums, types
-from aiogram import F, Router
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from aiogram import F
+from aiogram.types import (
+    Message,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    CallbackQuery
+    )
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters import CommandStart
 from aiogram.client.bot import DefaultBotProperties
@@ -32,9 +37,6 @@ logger.addHandler(handler)
 
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=enums.ParseMode.HTML))
 dp = Dispatcher()
-
-router = Router()
-
 
 builder = InlineKeyboardBuilder()
 
