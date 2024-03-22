@@ -224,6 +224,7 @@ async def handle_pagination_1(callback_query: CallbackQuery):
     if current_page - 1 >= 0:
         await bot.edit_message_text(f'{r[current_page-1]}', chat_id, message_id, reply_markup=generate_pagination_keyboard(page_count, current_page))
 
+
 async def main():
     await dp.start_polling(bot)
 
