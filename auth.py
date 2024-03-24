@@ -9,7 +9,8 @@ class FsaAuth:
 
     def __init__(self) -> None:
         self.ua = UserAgent()
-        self.proxies = {'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
+        self.proxies = {
+            'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
             'Authorization': os.getenv('FSA_TOKEN'),
@@ -24,7 +25,6 @@ class FsaAuth:
         }
 
     def get_auth(self, url='https://pub.fsa.gov.ru/login'):
-
         """ Получение токена авторизации"""
 
         response = requests.post(url, headers=self.headers,
@@ -35,7 +35,6 @@ class FsaAuth:
         os.environ['FSA_TOKEN'] = data.get('Authorization')
 
     def validation_token(self) -> bool:
-
         """ Проверка токена на валидность"""
 
         headers = {
@@ -56,7 +55,6 @@ class FsaAuth:
         return valid
 
     def get_token(self) -> str:
-
         """ Получение токена, если есть существующий,
             то проверяется его валидность"""
 

@@ -19,7 +19,8 @@ class Certificate():
         self.auth = FsaAuth()
         self.auth.get_token()
         self.cert_num = cert_num
-        self.proxies = {'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
+        self.proxies = {
+            'https': f"http://{os.getenv('PROXYUSER')}:{os.getenv('PROXYPASS')}@{os.getenv('PROXYIP')}"}
         self.headers = {
             'Accept': 'application/json, text/plain, */*',
             'Authorization': os.getenv('FSA_TOKEN'),
@@ -42,7 +43,6 @@ class Certificate():
         }
 
     def get_certificate(self) -> dict:
-
         """Функция запрашивает информацию по сертификату"""
         # logging.debug(self.proxies)
         # logging.debug(self.json_data)
@@ -79,7 +79,6 @@ class Certificate():
                 return False
 
     def get_certificate_sorted(self, data: dict) -> dict:
-
         """Функция вытягивает только нужные для нас поля
         из общих данных по сертификату"""
 
@@ -104,14 +103,13 @@ class Certificate():
                 'Applicant': applicant,
                 'Manufacturer': manufacturer,
                 'Production': product_name
-                }
+            }
             )
             collected_id['certificate'] = certificate
         # logging.info(collected_id)
         return collected_id
 
     def get_one_full_certificate(self, data: dict) -> dict:
-
         """Функция забирает более полные данные по выданому сертификату.
         Далее в теле используем функцию get_multi_info() в которой
         формируется файл с информацией о схеме сертификаата"""
@@ -129,7 +127,8 @@ class Certificate():
                 reglaments = response.get('idTechnicalReglaments', '')
                 status = response.get('idStatus', '')
                 # logging.debug(f" цикл {scheme}, {reglaments}, {status}")
-                multi = self.get_multi_info(cert_id, scheme, reglaments, status)
+                multi = self.get_multi_info(
+                    cert_id, scheme, reglaments, status)
                 scheme_dec = multi.get('id').get(cert_id).get('scheme')
                 dec_status = multi.get('status').get(cert_id).get('status')
                 i['Scheme'] = scheme_dec
@@ -140,19 +139,18 @@ class Certificate():
                        scheme: str,
                        reglaments: str,
                        status: str) -> dict:
-
         '''Функция для получения развернутых данных по схеме
         и статусу сертификата'''
 
         # logging.debug(f"get_multi__ {os.getenv('FSA_TOKEN')}")
         headers = {
-                'Accept': 'application/json, text/plain, */*',
-                'Authorization': os.getenv('FSA_TOKEN'),
-                'Content-Type': 'application/json',
-                'Origin': 'https://pub.fsa.gov.ru',
-                'Referer': 'https://pub.fsa.gov.ru/rss/certificate',
-                'User-Agent': f'{self.ua.random}'
-            }
+            'Accept': 'application/json, text/plain, */*',
+            'Authorization': os.getenv('FSA_TOKEN'),
+            'Content-Type': 'application/json',
+            'Origin': 'https://pub.fsa.gov.ru',
+            'Referer': 'https://pub.fsa.gov.ru/rss/certificate',
+            'User-Agent': f'{self.ua.random}'
+        }
 
         json_data_full = {
             'items': {
