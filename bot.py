@@ -10,7 +10,7 @@ from aiogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
     CallbackQuery
-    )
+)
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters import CommandStart
 from aiogram.client.bot import DefaultBotProperties
@@ -29,13 +29,15 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 handler = RotatingFileHandler('bot.log', maxBytes=1000000, backupCount=5)
-formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',)
+formatter = logging.Formatter(
+    '%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',)
 handler.setFormatter(formatter)
 
 logger.addHandler(handler)
 
 
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=enums.ParseMode.HTML))
+bot = Bot(token=TOKEN, default=DefaultBotProperties(
+    parse_mode=enums.ParseMode.HTML))
 dp = Dispatcher()
 
 builder = InlineKeyboardBuilder()
@@ -51,10 +53,10 @@ class FindInfo(StatesGroup):
 @dp.message(CommandStart())
 async def start(message: Message):
     kb = [
-            [
-                types.KeyboardButton(text="Декларации"),
-                types.KeyboardButton(text="Сертификаты")
-            ],
+        [
+            types.KeyboardButton(text="Декларации"),
+            types.KeyboardButton(text="Сертификаты")
+        ],
     ]
     keyboard = types.ReplyKeyboardMarkup(
         keyboard=kb,
@@ -181,9 +183,10 @@ async def send_info_with_pagination(msg_id, u_id, chat_id, info_list, current_pa
 def generate_pagination_keyboard(page_count, current_page):
     buttons = []
     if page_count > 1:
-            buttons.append(InlineKeyboardButton(text='<', callback_data='back'))
-            buttons.append(InlineKeyboardButton(text=f'{current_page}/{page_count}', callback_data='empty'))
-            buttons.append(InlineKeyboardButton(text='>', callback_data='next'))
+        buttons.append(InlineKeyboardButton(text='<', callback_data='back'))
+        buttons.append(InlineKeyboardButton(
+            text=f'{current_page}/{page_count}', callback_data='empty'))
+        buttons.append(InlineKeyboardButton(text='>', callback_data='next'))
     return InlineKeyboardMarkup(inline_keyboard=[buttons])
 
 
@@ -194,8 +197,10 @@ async def handle_pagination(callback_query: CallbackQuery):
     user_id = callback_query.from_user.id
     test_id = callback_query.inline_message_id
     logging.debug(test_id)
-    current_page = int(callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[0])
-    page_count = int(callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[1])
+    current_page = int(
+        callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[0])
+    page_count = int(
+        callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[1])
     if callback_query.data == 'back':
         current_page -= 1
     elif callback_query.data == 'next':
@@ -212,8 +217,10 @@ async def handle_pagination_1(callback_query: CallbackQuery):
     chat_id = callback_query.from_user.id
     message_id = callback_query.message.message_id
     user_id = callback_query.from_user.id
-    current_page = int(callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[0])
-    page_count = int(callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[1])
+    current_page = int(
+        callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[0])
+    page_count = int(
+        callback_query.message.reply_markup.inline_keyboard[0][1].text.split('/')[1])
     if callback_query.data == 'back':
         current_page -= 1
     elif callback_query.data == 'next':
